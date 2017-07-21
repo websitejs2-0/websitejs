@@ -1,2 +1,4 @@
-# wjs-core
-Core component of WebsiteJS
+# WebsiteJS
+A modular project kickstarter
+
+
