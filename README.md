@@ -16,7 +16,7 @@ A modular project kickstarter
 $ npm install 
 ```
 
- > NOTE: WebsiteJS uses Gulp 4.
+ > NOTE: WebsiteJS uses [Gulp 4](https://github.com/gulpjs/gulp/tree/4.0).
 
 ## Building
 ```sh
