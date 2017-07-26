@@ -1,0 +1,7 @@
+{
+    "watch": [
+        "../../package.json",
+        ".server.config.js",
+        "server.js"
+    ]
+}

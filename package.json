@@ -1,0 +1,33 @@
+{
+  "name": "websitejs2.0",
+  "version": "0.1.0",
+  "description": "Modular Frontend Kickstarter",
+  "main": "index.js",
+  "scripts": {
+    "start": "set NODE_ENV=development&& nodemon --config ./Frontend/server/nodemon.json ./Frontend/server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/websitejs2-0/websitejs.git"
+  },
+  "author": "Rocco Janse, roccojanse@outlook.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/websitejs2-0/websitejs/issues"
+  },
+  "homepage": "https://github.com/websitejs2-0/websitejs#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "chalk": "^2.0.1",
+    "connect-browser-sync": "^2.1.0",
+    "dev-ip": "^1.0.1",
+    "express": "^4.15.3",
+    "express-handlebars": "^3.0.0",
+    "find-free-port": "^1.0.2",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "node-fs-extra": "^0.8.2",
+    "nodemon": "^1.11.0",
+    "serve-favicon": "^2.4.3"
+  }
+}
