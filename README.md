@@ -28,15 +28,15 @@ $ npm build
 ```
 
 ## Development Server
-The development server is an nodejs express server based on browsersync and is kept alive by nodemon.
-It uses the nunjucks template engine to render templates and updates on the fly. No preprocessing neccessary.
+The development server is an NodeJS Express server based on BrowserSync and is kept alive by Nodemon.
+It uses Handlebars to render templates and updates on the fly. No preprocessing neccessary.
 To start the server use
 ```sh
 $ npm start
 ``` 
 
 ## Jasmine testing
-To start the tests run
+To start unit tests run
 ```sh
 $ npm test
 ```
