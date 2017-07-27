@@ -34,23 +34,34 @@ function compileAssets(done) {
 }
 
 function watchAssets() {
-    console.log(config.folders.src.assets.images);
-    var watcher = gulp.watch(path.join(config.folders.src.assets.images, '**/*.{jpg,png,gif}'));
+    // var watcher = gulp.watch(path.join(config.folders.src.assets.images, '**/*.{jpg,png,gif}'));
+    var watcher = gulp.watch(path.join(config.folders.src.assets.images), { ignorePermissionErrors: true });
 
     watcher.on('all', function(e, filePath, stats) {
         
-        // on remove, remove file from build dir
-        if (e === 'unlink') {
-            var pathChunks = path.parse(filePath),
-                fileName = pathChunks.base,
-                relFilePath = path.relative(config.folders.src.assets.images, pathChunks.dir),
-                distFilePath = path.join(config.folders.build.assets.images, relFilePath, fileName);
-            
-            del(distFilePath).then(function(paths) {
+        // get file (in build folder)
+        var pathChunks = path.parse(filePath),
+            fileName = pathChunks.base,
+            relFilePath = path.relative(config.folders.src.assets.images, pathChunks.dir),
+            distFilePath = path.join(config.folders.build.assets.images, relFilePath);
+
+        if (e === 'unlink' || e === 'unlinkDir') {
+            // on remove, remove file from build dir
+            del(path.join(distFilePath, fileName)).then(function(paths) {
                 if (paths.length > 0) {
                     gutil.log(chalk.yellow('Removed %s.'), paths.join(', '));
                 }
             });            
+        } else {
+            // on add or change, copy and optimize
+            gulp.src(path.join(config.folders.src.assets.images, '**/', fileName))
+                .pipe(imagemin([], {
+                    verbose: config.debugMode
+                }))
+                .pipe(gulp.dest(config.folders.build.assets.images)) 
+                .on('finish', function() { 
+                    gutil.log(chalk.yellow('%s %s.'), e, path.join(distFilePath, fileName));
+                });           
         }
 
     });
