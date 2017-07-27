@@ -16,15 +16,33 @@ A modular project kickstarter
 $ npm install 
 ```
 
+## Gulp
+To view all defined tasks run
+```sh
+$ gulp --tasks
+```
+or
+```sh
+$ gulp --tasks-simple
+```
  > NOTE: WebsiteJS uses [Gulp 4](https://github.com/gulpjs/gulp/tree/4.0).
 
 ## Building
 ```sh
-$ gulp
+$ gulp (specific task)
 ```
 or
 ```sh
-$ npm build
+$ npm run build
+```
+
+## Production Build
+```sh
+$ gulp (specific task) --env production
+```
+or
+```sh
+$ npm run build-production
 ```
 
 ## Localhost Development Server

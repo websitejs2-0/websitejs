@@ -1,18 +1,21 @@
 var path = require('path'),
     config = require(path.join(__dirname , 'Frontend', '.project.config.js')),
     requireDir = require('require-dir'),
+    chalk = require('chalk'),
     gulp = require('gulp');
 
 // get tasks from dir
-var taskFiles = requireDir(config.folders.gulpTasks);
+requireDir(config.folders.gulpTasks);
 
-// export/register found tasks
-Object.keys(taskFiles).forEach(function(taskName) {
-    //exports[taskName] = taskFiles[taskName];
-    console.log(taskName, taskFiles[taskName]);
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+process.argv.forEach(function(val, i) {
+    if (val === '--env' && process.argv[i + 1] === 'production') {
+        process.env.NODE_ENV = process.argv[i + 1];
+    }
 });
 
-// // export/register default (build) task
-// const build = gulp.series(gulp.parallel(exports.scripts, exports.sass), gulp.parallel(exports.svgicons, exports.assets));
-// export default build;
+console.clear();
+console.log(chalk.yellow('\n\nCurrent environment: %s\n\n'), process.env.NODE_ENV);
 
+// register default task
+gulp.task('default', gulp.series(gulp.parallel('assets')));
