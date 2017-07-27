@@ -1,6 +1,7 @@
 'use strict';
 
 var path = require('path'),
+    slash = require('slash'),
     config = require(path.join('..', '.project.config.js'));
 
 var server = {
@@ -22,7 +23,7 @@ var server = {
             images: path.relative(config.folders.build.root,  config.folders.build.assets.images),
             icons: {
                 root: path.relative(config.folders.build.root, config.folders.build.assets.icons.root),
-                svg: path.relative(config.folders.build.root, config.folders.build.assets.icons.svg)
+                svg: slash(path.relative(config.folders.build.root, config.folders.build.assets.icons.svg))
             },
             fonts: path.relative(config.folders.build.root, config.folders.build.assets.fonts)
         }

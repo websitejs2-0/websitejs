@@ -42,7 +42,7 @@ app.set('views', path.join(__dirname, '/views'));
 app.use(require('connect-browser-sync')(bs));
 
 // set server root as static map
-//app.use(express.static(config.server.root));
+app.use(express.static(config.server.root));
 
 // favicon
 app.use(favicon(path.join(config.server.root, 'assets', 'icons', 'favicon.ico')));

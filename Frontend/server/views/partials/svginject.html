@@ -1,0 +1,14 @@
+<script>
+    // SVG system inject
+    var scripts = document.getElementsByTagName('script'),
+        script = scripts[scripts.length - 1],
+        xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        var div = document.createElement('div');
+        div.innerHTML = this.responseText;
+        div.style.display = 'none';
+        script.parentNode.insertBefore(div, script);
+    };
+    xhr.open('get', '/{{ paths.assets.icons.svg }}/svgicons.svg', true);
+    xhr.send();
+</script>

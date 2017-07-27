@@ -10,21 +10,20 @@ var path = require('path'),
  * Cleans assets folder by removing jpg/png/gif files.
  * @param {function} done Callback.
  */
-function cleanAssets(done) {
+function clean(done) {
     del([path.join(config.folders.build.assets.images, '**/*.{jpg,png,gif}'), '!' + config.folders.build.assets.images]).then(function(paths) {
-        if (config.debugMode) {
+        if (config.debugMode && paths.length > 0) {
             gutil.log('Cleaned:\n', paths.join('\n'));
         }
         done();
     });
-    done();
 }
 
 /**
  * Copies and optimizes assets to build folder.
  * @param {function} done Callback.
  */
-function compileAssets(done) {
+function compile(done) {
     gulp.src(path.join(config.folders.src.assets.images, '**/*.{jpg,png,gif}'))
         .pipe(imagemin([], {
             verbose: config.debugMode
@@ -33,8 +32,10 @@ function compileAssets(done) {
         .on('finish', function() { done(); });
 }
 
-function watchAssets() {
-    // var watcher = gulp.watch(path.join(config.folders.src.assets.images, '**/*.{jpg,png,gif}'));
+/**
+ * Watches assets images folder for changes.
+ */
+function watch() {
     var watcher = gulp.watch(path.join(config.folders.src.assets.images), { ignorePermissionErrors: true });
 
     watcher.on('all', function(e, filePath, stats) {
@@ -67,11 +68,13 @@ function watchAssets() {
     });
 }
 
-// define task
-gulp.task('assets', gulp.series(cleanAssets, compileAssets));
-gulp.task('assets:watch', gulp.parallel(watchAssets));
-
-// add task information
+// define tasks and add task information
+gulp.task('assets', gulp.series(clean, compile));
 var assets = gulp.task('assets');
-assets.displayName = 'Assets';
+assets.displayName = 'assets';
 assets.description = 'Copy and optimize assets.';
+
+gulp.task('assets:watch', gulp.parallel(watch));
+var assetsWatch = gulp.task('assets:watch');
+assetsWatch.displayName = 'assets:watch';
+assetsWatch.description = 'Watches assets images folder for changes.';
