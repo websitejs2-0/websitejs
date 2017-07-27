@@ -8,7 +8,7 @@ A modular project kickstarter
  Make sure you have [NodeJS](http://nodejs.org) version 7 or higher installed and
  install global dependencies:
  ```sh
- $ npm install -g npm node-gyp rimraf jshint nodemon gulp-cli jasmine
+ $ npm install -g npm node-gyp rimraf jshint sass-lint nodemon gulp-cli jasmine
  ```
 
  Install project dependencies:

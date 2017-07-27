@@ -21,13 +21,17 @@
     "browser-sync": "^2.18.13",
     "chalk": "^2.0.1",
     "connect-browser-sync": "^2.1.0",
+    "del": "^3.0.0",
     "dev-ip": "^1.0.1",
     "express": "^4.15.3",
     "express-handlebars": "^3.0.0",
     "find-free-port": "^1.0.2",
     "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-imagemin": "^3.3.0",
+    "gulp-util": "^3.0.8",
     "node-fs-extra": "^0.8.2",
     "nodemon": "^1.11.0",
+    "require-dir": "^0.3.2",
     "serve-favicon": "^2.4.3"
   }
 }
