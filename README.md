@@ -65,7 +65,7 @@ $ npm test
 The svg icon system combine svg files into one 'svg spritesheet' with `<symbol>` elements based on the [CSS Tricks article](http://css-tricks.com/svg-symbol-good-choice-icons/). Nested directories that may have files with the same name, are concatenated by relative path with the name of the file, e.g. `src/assets/icons/svg/social/facebook.svg` becomes `#social-facebook`.
 
 ### Using an icon
-If you want to use and insert an icon, use the id "#<foldername>-<svgname>" inside a ```<use>```-tag. SVG Icons should always have an ```<svg>```-tag with the minimum base class "icon".
+If you want to use and insert an icon, use the id ```"#foldername-svgname"``` inside a ```<use>```-tag. SVG Icons should always have an ```<svg>```-tag with the minimum base class "icon".
 ```sh
 <svg class="icon">
     <use xlink:href="#foldername-svgname"></use>
