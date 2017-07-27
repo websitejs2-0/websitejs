@@ -1,7 +1,7 @@
 'use strict';
 
 var path = require('path'),
-    config = require('./.server.config.js'),
+    config = require('./server.config.js'),
     devIp = require('dev-ip'),
     findPort = require('find-free-port'),
     chalk = require('chalk'),

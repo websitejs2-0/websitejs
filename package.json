@@ -4,7 +4,7 @@
   "description": "Modular Frontend Kickstarter",
   "main": "index.js",
   "scripts": {
-    "start": "set NODE_ENV=development&& nodemon --config ./Frontend/server/nodemon.json ./Frontend/server/server.js",
+    "start": "set NODE_ENV=development&&nodemon --config ./Frontend/server/nodemon.json ./Frontend/server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
