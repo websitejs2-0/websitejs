@@ -25,7 +25,6 @@ bs.watch(config.server.filesToWatch).on('change', function(filename, fileinfo) {
     bs.reload();
 });
 
-
 // configure handlebars 
 var hbs = exphbs.create({
     defaultLayout: path.join(__dirname, 'views', 'layouts', 'master'),
