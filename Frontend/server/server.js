@@ -45,7 +45,7 @@ app.use(require('connect-browser-sync')(bs));
 //app.use(express.static(config.server.root));
 
 // favicon
-//app.use(favicon(path.join(config.server.root, 'assets', 'icons', 'favicon.ico')));
+app.use(favicon(path.join(config.server.root, 'assets', 'icons', 'favicon.ico')));
 
 // // routers
 // var routers = {
@@ -62,7 +62,8 @@ app.get('/', function(req, res) {
         },
         project: {
             title: config.project.name,
-            version: config.project.version
+            version: config.project.version,
+            description: config.project.description
         },
         paths: config.server.paths
     });

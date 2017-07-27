@@ -8,7 +8,8 @@ var path = require('path'),
 
     project = {
         name: pkg.name,
-        version: pkg.version
+        version: pkg.version,
+        description: pkg.description
     },
 
     cwd = __dirname,
