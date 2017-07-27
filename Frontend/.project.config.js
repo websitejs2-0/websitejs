@@ -15,7 +15,7 @@ var path = require('path'),
     cwd = __dirname,
     gulpTasks = path.join(cwd, 'gulp', 'tasks'),
     srcRoot = path.join(cwd, 'src'),
-    buildRoot = path.join(cwd, 'dist'),
+    buildRoot = path.join(cwd, '..', 'static'),
 
     jsFileName = 'scripts',
     cssFileName = 'styles',
