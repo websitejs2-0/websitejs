@@ -1,5 +1,5 @@
 var path = require('path'),
-    config = require(path.join('..', '..', '.project.config.js')),
+    config = require(path.join('..', '..', 'project.config.js')),
     del = require('del'),
     chalk = require('chalk'),
     gulp = require('gulp'),

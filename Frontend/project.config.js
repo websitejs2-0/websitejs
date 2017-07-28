@@ -2,8 +2,10 @@
 
 // create paths/folders
 var path = require('path'),
-    pkg = require(path.join('..', 'package.json')),
+    pkg = require('../package.json'),
+    vendor = require('./vendor/vendor.config.js'),
     
+    // debug mode; generates extra output on builds
     debugMode = true,
 
     project = {
@@ -12,14 +14,18 @@ var path = require('path'),
         description: pkg.description
     },
 
+    // current working dir, root folders
     cwd = __dirname,
     gulpTasks = path.join(cwd, 'gulp', 'tasks'),
     srcRoot = path.join(cwd, 'src'),
     buildRoot = path.join(cwd, '..', 'static'),
 
+    // filenames
     jsFileName = 'scripts',
     cssFileName = 'styles',
+    vendorFileName = vendor.fileName,
 
+    // source and build folders
     folders = {
         src: {
             root: srcRoot,
@@ -35,7 +41,7 @@ var path = require('path'),
                 fonts: path.join(srcRoot, 'assets', 'fonts')
             },
             elements: path.join(srcRoot, 'elements'),
-            components: path.join(srcRoot, 'components')
+            components: path.join(srcRoot, 'components'),
         },
         build: {
             root: buildRoot,
@@ -53,21 +59,41 @@ var path = require('path'),
             elements: path.join(buildRoot, 'elements'),
             components: path.join(buildRoot, 'components')
         },
+        vendor: {
+            src: {
+                root: path.join(cwd, 'vendor')
+            },
+            build: {
+                root: path.join(buildRoot, 'vendor'),
+                js: path.join(buildRoot, 'js', 'vendor'),
+                css: path.join(buildRoot, 'css', 'vendor')
+            }
+        },
         test: path.join(cwd, 'test')
     };
 
-// create object
+// create object to export
 var config = {
     project: project,
     debugMode: debugMode,
     cwd: cwd,
     jsFileName: jsFileName,
     cssFileName: cssFileName,
+    vendorFileName: vendorFileName,
     folders: {
         gulpTasks: gulpTasks,
         src: folders.src,
         build: folders.build,
+        vendor: {
+            src: folders.vendor.src,
+            build: folders.vendor.build
+        },
         test: folders.test
+    },
+    vendor: {
+        scripts: vendor.scripts,
+        styles: vendor.styles,
+        other: vendor.other
     }
 };
 

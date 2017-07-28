@@ -2,7 +2,7 @@
 
 var path = require('path'),
     slash = require('slash'),
-    config = require(path.join('..', '.project.config.js'));
+    config = require(path.join('..', 'project.config.js'));
 
 var server = {
     root: config.folders.build.root,

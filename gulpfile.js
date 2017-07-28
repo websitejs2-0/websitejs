@@ -1,5 +1,5 @@
 var path = require('path'),
-    config = require(path.join(__dirname , 'Frontend', '.project.config.js')),
+    config = require(path.join(__dirname , 'Frontend', 'project.config.js')),
     requireDir = require('require-dir'),
     chalk = require('chalk'),
     gulp = require('gulp');

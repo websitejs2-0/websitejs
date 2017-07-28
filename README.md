@@ -61,6 +61,16 @@ To start unit tests run
 $ npm test
 ```
 
+## Vendor packages
+To add vendor scripts and styles to the project use NPM where possible, so the vendor package is in the node_modules folders.
+After added the package you'll have to add the script and/or css files to the corresponding array in the `vendor config file` found in the Frontend/vendor folder.
+
+ > You can use both minified (*.min.*) and non-minified files to add to the arrays. Websitejs will sort them and add all files minified to the vendor scripts or vendor styles files.
+
+### Vendor packages not in NPM
+Vendor packages which aren't available via npm can be added to the Frontend/vendor folder. Create a folder for your package and add the necessary js and css files.
+Try to avoid packages which you have to download manually as much as possible, but this way you can still add them. These files will be picked up automatically, no need to add them in the config file.
+
 ## SVG icon system
 The svg icon system combine svg files into one 'svg spritesheet' with `<symbol>` elements based on the [CSS Tricks article](http://css-tricks.com/svg-symbol-good-choice-icons/). Nested directories that may have files with the same name, are concatenated by relative path with the name of the file, e.g. `src/assets/icons/svg/social/facebook.svg` becomes `#social-facebook`.
 
