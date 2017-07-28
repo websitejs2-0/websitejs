@@ -61,6 +61,9 @@ To start unit tests run
 $ npm test
 ```
 
+## Supported browsers
+WebsiteJS uses [Browserslist](https://github.com/ai/browserslist) which can be configured in the `.browserslistrc` file in the root of the project.
+
 ## Vendor packages
 To add vendor scripts and styles to the project use NPM where possible, so the vendor package is in the node_modules folder.
 After adding the package you'll have to add the script and/or css files to the corresponding array in the `vendor config file` found in the Frontend/vendor folder.
