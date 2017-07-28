@@ -62,8 +62,8 @@ $ npm test
 ```
 
 ## Vendor packages
-To add vendor scripts and styles to the project use NPM where possible, so the vendor package is in the node_modules folders.
-After added the package you'll have to add the script and/or css files to the corresponding array in the `vendor config file` found in the Frontend/vendor folder.
+To add vendor scripts and styles to the project use NPM where possible, so the vendor package is in the node_modules folder.
+After adding the package you'll have to add the script and/or css files to the corresponding array in the `vendor config file` found in the Frontend/vendor folder.
 
  > You can use both minified (*.min.*) and non-minified files to add to the arrays. Websitejs will sort them and add all files minified to the vendor scripts or vendor styles files.
 
