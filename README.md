@@ -16,6 +16,12 @@ A modular project kickstarter
 $ npm install 
 ```
 
+## Architecture
+
+#### Styles
+WebsiteJs uses the Atomic Design priciple (not to be confused with the methodology). The sass architecture is based on ITCSS and uses the BEM methodology.
+This way it is modular, scalable, flexible and maintainable. Based on the article [better css with atomic, itcss and bem](https://www.silverstripe.org/blog/better-css-putting-it-together-with-atomic-itcss-and-bem/). Must read!
+
 ## Building
 To view all defined tasks run
 ```sh
