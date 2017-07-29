@@ -6,6 +6,7 @@ var path = require('path'),
     gutil = require('gulp-util'),
     sourcemaps = require('gulp-sourcemaps'),
     sass = require('gulp-sass'),
+    sasslint = require('gulp-sass-lint'),
     postcss = require('gulp-postcss'),
     autoprefixer = require('autoprefixer'),
     cssnano = require('gulp-cssnano'),
@@ -45,6 +46,10 @@ function compileStyles(done) {
 
     gulp.src(path.join(config.folders.src.root, config.cssFileName + '.{scss,sass}'))
         .pipe((process.env.NODE_ENV !== 'production') ? sourcemaps.init() : gutil.noop())
+        .pipe(sasslint({
+            configFile: './.sass-lint.yml'
+        }))
+        .pipe(sasslint.format())
         .pipe(sass({
             outputStyle: 'expanded',
             defaultEncoding: 'utf-8',
@@ -76,36 +81,11 @@ function compileStyles(done) {
  * Watches assets images folder for changes.
  */
 function watchStyles() {
-    // var watcher = gulp.watch(path.join(config.folders.src.assets.images), { ignorePermissionErrors: true });
-
-    // watcher.on('all', function(e, filePath, stats) {
-        
-    //     // get file (in build folder)
-    //     var pathChunks = path.parse(filePath),
-    //         fileName = pathChunks.base,
-    //         relFilePath = path.relative(config.folders.src.assets.images, pathChunks.dir),
-    //         distFilePath = path.join(config.folders.build.assets.images, relFilePath);
-
-    //     if (e === 'unlink' || e === 'unlinkDir') {
-    //         // on remove, remove file from build dir
-    //         del(path.join(distFilePath, fileName)).then(function(paths) {
-    //             if (paths.length > 0) {
-    //                 gutil.log(chalk.yellow('Removed %s.'), paths.join(', '));
-    //             }
-    //         });            
-    //     } else {
-    //         // on add or change, copy and optimize
-    //         gulp.src(path.join(config.folders.src.assets.images, '**/', fileName))
-    //             .pipe(imagemin([], {
-    //                 verbose: config.debugMode
-    //             }))
-    //             .pipe(gulp.dest(config.folders.build.assets.images)) 
-    //             .on('finish', function() { 
-    //                 gutil.log(chalk.yellow('%s %s.'), e, path.join(distFilePath, fileName));
-    //             });           
-    //     }
-
-    // });
+    gulp.watch([
+        path.join(config.folders.src.root, config.cssFileName + '.{scss,sass}'),
+        path.join(config.folders.src.elements, '**/*.{scss,sass}'),
+        path.join(config.folders.src.components, '**/*.{scss,sass}')
+    ], { ignorePermissionErrors: true }, gulp.parallel('styles'));
 }
 
 // define tasks and add task information

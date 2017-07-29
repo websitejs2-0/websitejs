@@ -20,8 +20,7 @@ process.argv.forEach(function(val) {
 });
 
 console.clear();
-console.log(chalk.yellow('\nCurrent environment: %s %s\n'), process.env.NODE_ENV, (process.env.DEBUG === 'true') ? 'in debug mode.' : '');
-console.log(process.env.DEBUG, process.env.DEBUG === 'true');
+console.log(chalk.yellow('\nBuild: %s %s\n'), process.env.NODE_ENV, (process.env.DEBUG === 'true') ? 'in debug mode.' : '');
 
 // register default task
 gulp.task('default', gulp.series(gulp.parallel('assets', 'svgicons', 'vendor'), gulp.parallel('styles')));

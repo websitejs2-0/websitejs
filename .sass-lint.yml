@@ -38,7 +38,7 @@ rules:
 
   # enforce the use of hexadecimal color values rather than literals
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/no-color-keywords.md
-  no-color-keywords: 2
+  no-color-keywords: 1
 
   # enforce that only valid of hexadecimal values are written
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/no-invalid-hex.md
@@ -78,7 +78,7 @@ rules:
 
   # enforce that trailing whitespace is not allowed
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/no-trailing-whitespace.md
-  no-trailing-whitespace: 2
+  no-trailing-whitespace: 1
 
   # enforce that protocols and domains are not used within urls
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/no-url-protocols.md
@@ -86,7 +86,7 @@ rules:
 
   # enforce that vendor prefixes are not allowed to be used
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/no-vendor-prefixes.md
-  no-vendor-prefixes: 1
+  no-vendor-prefixes: 2
 
   # enforce that @warn statements are not allowed to be used
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/no-warn.md
@@ -173,14 +173,14 @@ rules:
   # enforce how deeply a selector can be nested (defaults to 2)
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/nesting-depth.md
   nesting-depth:
-    - 0
+    - 1
     - max-depth: 3
 
   # enforce whether single quotes ('') or double quotes ("") should be used for all strings (defaults single)
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/quotes.md
   quotes:
     - 1
-    - style: double
+    - style: single
 
   # enforce that URLs are wrapped in quotes
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/url-quotes.md
