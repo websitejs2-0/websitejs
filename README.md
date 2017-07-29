@@ -16,7 +16,7 @@ A modular project kickstarter
 $ npm install 
 ```
 
-## Gulp
+## Building
 To view all defined tasks run
 ```sh
 $ gulp --tasks
@@ -27,7 +27,8 @@ $ gulp --tasks-simple
 ```
  > NOTE: WebsiteJS uses [Gulp 4](https://github.com/gulpjs/gulp/tree/4.0).
 
-## Building
+To start a build:
+
 ```sh
 $ gulp (specific task)
 ```
