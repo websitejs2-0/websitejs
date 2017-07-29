@@ -16,7 +16,7 @@ A modular project kickstarter
 $ npm install 
 ```
 
-### Architecture
+## Architecture
 
 #### Scripts
 
@@ -25,10 +25,10 @@ $ npm install
 WebsiteJs uses the Atomic Design principle (not to be confused with the methodology). The sass architecture is based on ITCSS and uses the BEM methodology.
 This way it is modular, scalable, flexible and maintainable. Based on the article [better css with atomic, itcss and bem](https://www.silverstripe.org/blog/better-css-putting-it-together-with-atomic-itcss-and-bem/). Must read!
 
-### Supported browsers
+## Supported browsers
 WebsiteJS uses [Browserslist](https://github.com/ai/browserslist) which can be configured in the `.browserslistrc` file in the root of the project.
 
-### Vendor packages
+## Vendor packages
 To add vendor scripts and styles to the project use NPM where possible, so the vendor package is in the node_modules folder.
 After adding the package you'll have to add the script and/or css files to the corresponding array in the `vendor config file` found in the Frontend/vendor folder.
 
@@ -38,7 +38,7 @@ After adding the package you'll have to add the script and/or css files to the c
 Vendor packages which aren't available via npm can be added to the Frontend/vendor folder. Create a folder for your package and add the necessary js and css files.
 Try to avoid packages which you have to download manually as much as possible, but this way you can still add them. These files will be picked up automatically, no need to add them in the config file.
 
-### SVG icon system
+## The SVG icon system
 The svg icon system combine svg files into one 'svg spritesheet' with `<symbol>` elements based on the [CSS Tricks article](http://css-tricks.com/svg-symbol-good-choice-icons/). Nested directories that may have files with the same name, are concatenated by relative path with the name of the file, e.g. `src/assets/icons/svg/social/facebook.svg` becomes `#social-facebook`.
 
 #### Using an icon
@@ -72,7 +72,7 @@ Optionally you can add a ```<g>``` (group) to isolate multiple paths or fills as
 </svg>
 ```
 
-### Building
+## Building
 To view all defined tasks run
 ```sh
 $ gulp --tasks
@@ -106,7 +106,7 @@ $ npm run build-production
 ```
  > You can use both --debug and --production flags independend from each other or at the same time. E.g: ``` $ gulp --debug --production```
 
-### Localhost Development Server
+## Localhost Development Server
 The development server is an NodeJS Express server based on BrowserSync and is kept alive by Nodemon.
 It uses Handlebars to render templates and updates on the fly. No preprocessing neccessary.
 The server watches all project files and will auto-reload when changes are detected.
@@ -116,7 +116,7 @@ $ npm start
 ``` 
 The server auto-detects a free port (from port number 3000 and up) and is run in development (NODE_ENV) mode.
 
-<!-- ### Jasmine testing
+<!-- ## Jasmine testing
 To start unit tests run
 ```sh
 $ npm test
