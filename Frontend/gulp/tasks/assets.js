@@ -10,9 +10,9 @@ var path = require('path'),
  * Cleans assets folder by removing jpg/png/gif files.
  * @param {function} done Callback.
  */
-function clean(done) {
+function cleanAssets(done) {
     del([path.join(config.folders.build.assets.images, '**/*.{jpg,png,gif}'), '!' + config.folders.build.assets.images]).then(function(paths) {
-        if (config.debugMode && paths.length > 0) {
+        if (process.env.DEBUG === 'true' && paths.length > 0) {
             gutil.log('Cleaned:\n', paths.join('\n'));
         }
         done();
@@ -23,10 +23,10 @@ function clean(done) {
  * Copies and optimizes assets to build folder.
  * @param {function} done Callback.
  */
-function compile(done) {
+function compileAssets(done) {
     gulp.src(path.join(config.folders.src.assets.images, '**/*.{jpg,png,gif}'))
         .pipe(imagemin([], {
-            verbose: config.debugMode
+            verbose: (process.env.DEBUG === 'true')
         }))
         .pipe(gulp.dest(config.folders.build.assets.images))
         .on('finish', function() { done(); });
@@ -35,10 +35,10 @@ function compile(done) {
 /**
  * Watches assets images folder for changes.
  */
-function watch() {
+function watchAssets() {
     var watcher = gulp.watch(path.join(config.folders.src.assets.images), { ignorePermissionErrors: true });
 
-    watcher.on('all', function(e, filePath, stats) {
+    watcher.on('all', function(e, filePath) {
         
         // get file (in build folder)
         var pathChunks = path.parse(filePath),
@@ -57,7 +57,7 @@ function watch() {
             // on add or change, copy and optimize
             gulp.src(path.join(config.folders.src.assets.images, '**/', fileName))
                 .pipe(imagemin([], {
-                    verbose: config.debugMode
+                    verbose: (process.env.DEBUG === 'true')
                 }))
                 .pipe(gulp.dest(config.folders.build.assets.images)) 
                 .on('finish', function() { 
@@ -69,12 +69,12 @@ function watch() {
 }
 
 // define tasks and add task information
-gulp.task('assets', gulp.series(clean, compile));
+gulp.task('assets', gulp.series(cleanAssets, compileAssets));
 var assets = gulp.task('assets');
 assets.displayName = 'assets';
 assets.description = 'Copy and optimize assets.';
 
-gulp.task('assets:watch', gulp.parallel(watch));
+gulp.task('assets:watch', gulp.parallel(watchAssets));
 var assetsWatch = gulp.task('assets:watch');
 assetsWatch.displayName = 'assets:watch';
 assetsWatch.description = 'Watches assets images folder for changes.';

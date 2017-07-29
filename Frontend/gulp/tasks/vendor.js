@@ -24,7 +24,7 @@ function cleanVendorScripts(done) {
         //path.join(config.folders.vendor.build.root, '**/*.*'), '!' + config.folders.vendor.build.root,
         path.join(config.folders.vendor.build.js, config.vendorFileName + '.{min.js,min.js.map,js}'), '!' + config.folders.vendor.build.js,
     ]).then(function(paths) {
-        if (config.debugMode && paths.length > 0) {
+        if (process.env.DEBUG === 'true' && paths.length > 0) {
             gutil.log('Cleaned:\n', paths.join('\n'));
         }
         done();
@@ -40,7 +40,7 @@ function cleanVendorStyles(done) {
         //path.join(config.folders.vendor.build.root, '**/*.*'), '!' + config.folders.vendor.build.root,
         path.join(config.folders.vendor.build.css, config.vendorFileName + '.{min.css,min.css.map,css}'), '!' + config.folders.vendor.build.css
     ]).then(function(paths) {
-        if (config.debugMode && paths.length > 0) {
+        if (process.env.DEBUG === 'true' && paths.length > 0) {
             gutil.log('Cleaned:\n', paths.join('\n'));
         }
         done();
@@ -67,7 +67,7 @@ function compileVendorScripts(done) {
     var filterMinified = filter(['**', '!**/*.min.js'], { restore: true });
 
     gulp.src(sources)
-        .pipe(sourcemaps.init())
+        .pipe((process.env.NODE_ENV !== 'production') ? sourcemaps.init() : gutil.noop())
         .pipe(filterMinified)
         .pipe(uglify())
         .pipe(filterMinified.restore)
@@ -76,7 +76,7 @@ function compileVendorScripts(done) {
         .pipe(rename({
             suffix: '.min'
         }))
-        .pipe(sourcemaps.write('.'))
+        .pipe((process.env.NODE_ENV !== 'production') ? sourcemaps.write('.') : gutil.noop())
         .pipe(gulp.dest(config.folders.vendor.build.js))
         .on('finish', function() { done(); });
 }
@@ -100,7 +100,7 @@ function compileVendorStyles(done) {
     var filterMinified = filter(['**', '!**/*.min.css'], { restore: true });
 
     gulp.src(sources)
-        .pipe(sourcemaps.init())
+        .pipe((process.env.NODE_ENV !== 'production') ? sourcemaps.init() : gutil.noop())
         .pipe(filterMinified)
         .pipe(postcss([
             autoprefixer(),
@@ -118,7 +118,7 @@ function compileVendorStyles(done) {
         .pipe(filterMinified.restore)
         .pipe(strip())
         .pipe(concat(config.vendorFileName + '.min.css'))
-        .pipe(sourcemaps.write('.'))
+        .pipe((process.env.NODE_ENV !== 'production') ? sourcemaps.write('.') : gutil.noop())
         .pipe(gulp.dest(config.folders.vendor.build.css))
         .on('finish', function() { done(); });
 }
@@ -149,7 +149,6 @@ function watchVendor() {
     });
 
     var foldersWatcher = gulp.watch([path.join(config.folders.vendor.src.root), '!' + path.join(config.folders.vendor.src.root, 'vendor.config.js')], { ignorePermissionErrors: true });
-
     foldersWatcher.on('all', function(e, filePath) {
 
         if (e === 'add' || e === 'change' || e === 'unlink') {

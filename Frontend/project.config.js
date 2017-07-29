@@ -4,9 +4,6 @@
 var path = require('path'),
     pkg = require('../package.json'),
     vendor = require('./vendor/vendor.config.js'),
-    
-    // debug mode; generates extra output on builds
-    debugMode = true,
 
     project = {
         name: pkg.name,
@@ -75,7 +72,6 @@ var path = require('path'),
 // create object to export
 var config = {
     project: project,
-    debugMode: debugMode,
     cwd: cwd,
     jsFileName: jsFileName,
     cssFileName: cssFileName,

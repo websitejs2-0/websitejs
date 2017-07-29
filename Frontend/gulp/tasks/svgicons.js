@@ -12,9 +12,9 @@ var path = require('path'),
  * Cleans assets svg icons folder by removing svg files.
  * @param {function} done Callback.
  */
-function clean(done) {
+function cleanSvgIcons(done) {
     del([path.join(config.folders.build.assets.icons.svg, '**/*.svg'), '!' + config.folders.build.assets.icons.svg]).then(function(paths) {
-        if (config.debugMode && paths.length > 0) {
+        if (process.env.DEBUG === 'true' && paths.length > 0) {
             gutil.log('Cleaned:\n', paths.join('\n'));
         }
         done();
@@ -25,7 +25,7 @@ function clean(done) {
  * Compiles a svg 'spritesheet' prefixed based on folder structure.
  * @param {function} done Callback.
  */
-function compile(done) {
+function compileSvgIcons(done) {
     gulp.src(path.join(config.folders.src.assets.icons.svg, '**/*.svg'), { 
         base: config.folders.src.assets.icons.svg 
     })
@@ -48,11 +48,11 @@ function compile(done) {
 /**
  * Watches svg icons folder for changes.
  */
-function watch() {
+function watchSvgIcons() {
     var watcher = gulp.watch(path.join(config.folders.src.assets.icons.svg), { ignorePermissionErrors: true }),
         inProgress = false;
 
-    watcher.on('all', function(e, filePath, stats) {
+    watcher.on('all', function() {
         if (inProgress === false) {
             gutil.log(chalk.white('Updating svg icons...'));
             inProgress = true;
@@ -69,12 +69,12 @@ function watch() {
 }
 
 // define tasks and task information
-gulp.task('svgicons', gulp.series(clean, compile));
+gulp.task('svgicons', gulp.series(cleanSvgIcons, compileSvgIcons));
 var svgicons = gulp.task('svgicons');
 svgicons.displayName = 'svgicons';
 svgicons.description = 'Creates SVG icons spritesheet.';
 
-gulp.task('svgicons:watch', gulp.parallel(watch));
+gulp.task('svgicons:watch', gulp.parallel(watchSvgIcons));
 var svgiconsWatch = gulp.task('svgicons:watch');
 svgiconsWatch.displayName = 'svgicons:watch';
 svgiconsWatch.description = 'Watches svg icon dir for changes.';

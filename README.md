@@ -35,15 +35,20 @@ or
 ```sh
 $ npm run build
 ```
-
-## Production Build
+### Debug mode
 ```sh
-$ gulp (specific task) --env production
+$ gulp (specific task) --debug
+```
+### Production mode
+```sh
+$ gulp (specific task) --production
 ```
 or
 ```sh
 $ npm run build-production
 ```
+ > You can use both --debug and --production flags independend from each other or at the same time. E.g: ``` $ gulp --debug --production```
+
 
 ## Localhost Development Server
 The development server is an NodeJS Express server based on BrowserSync and is kept alive by Nodemon.
