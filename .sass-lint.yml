@@ -180,7 +180,7 @@ rules:
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/quotes.md
   quotes:
     - 1
-    - style: single
+    - style: double
 
   # enforce that URLs are wrapped in quotes
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/url-quotes.md

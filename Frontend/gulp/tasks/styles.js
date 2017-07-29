@@ -83,7 +83,8 @@ function compileStyles(done) {
 function watchStyles() {
     gulp.watch([
         path.join(config.folders.src.root, config.cssFileName + '.{scss,sass}'),
-        path.join(config.folders.src.elements, '**/*.{scss,sass}'),
+        path.join(config.folders.src.css, '**/*.{scss,sass}'),
+        path.join(config.folders.src.objects, '**/*.{scss,sass}'),
         path.join(config.folders.src.components, '**/*.{scss,sass}')
     ], { ignorePermissionErrors: true }, gulp.parallel('styles'));
 }
@@ -97,4 +98,4 @@ styles.description = 'Compiles css file from sass source.';
 gulp.task('styles:watch', gulp.parallel(watchStyles));
 var stylesWatch = gulp.task('styles:watch');
 stylesWatch.displayName = 'styles:watch';
-stylesWatch.description = 'Watches sass file, elements and components folders for changes.';
+stylesWatch.description = 'Watches sass file, objects and components folders for changes.';

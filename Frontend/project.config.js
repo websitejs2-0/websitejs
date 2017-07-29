@@ -37,7 +37,7 @@ var path = require('path'),
                 },
                 fonts: path.join(srcRoot, 'assets', 'fonts')
             },
-            elements: path.join(srcRoot, 'elements'),
+            objects: path.join(srcRoot, 'objects'),
             components: path.join(srcRoot, 'components'),
         },
         build: {
@@ -53,7 +53,7 @@ var path = require('path'),
                 },
                 fonts: path.join(buildRoot, 'assets', 'fonts')
             },
-            elements: path.join(buildRoot, 'elements'),
+            objects: path.join(buildRoot, 'objects'),
             components: path.join(buildRoot, 'components')
         },
         vendor: {

@@ -1,0 +1,1 @@
+Base, unclassed html elements, e.g. headings, lists, tables, this is the last layer that styles tag selectors

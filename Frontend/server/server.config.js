@@ -10,7 +10,7 @@ var server = {
     folders: {
         views: [
             path.join(__dirname, 'views'),
-            config.folders.src.elements,
+            config.folders.src.objects,
             config.folders.src.components
         ]
     },
@@ -32,7 +32,7 @@ var server = {
     filesToWatch: [
         path.join(__dirname, 'views', '**/*.html'),
         path.join(config.folders.build.root, '**/*.{js, css}'),
-        path.join(config.folders.src.elements, '**/*.html'),
+        path.join(config.folders.src.objects, '**/*.html'),
         path.join(config.folders.src.components, '**/*.html')        
     ]
 };
