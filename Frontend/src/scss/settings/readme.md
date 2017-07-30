@@ -1,1 +1,0 @@
-global variables, such as brand colours, configs etc

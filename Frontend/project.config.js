@@ -18,8 +18,6 @@ var path = require('path'),
     buildRoot = path.join(cwd, '..', 'static'),
 
     // filenames
-    jsFileName = 'scripts',
-    cssFileName = 'styles',
     vendorFileName = vendor.fileName,
 
     // source and build folders
@@ -73,8 +71,6 @@ var path = require('path'),
 var config = {
     project: project,
     cwd: cwd,
-    jsFileName: jsFileName,
-    cssFileName: cssFileName,
     vendorFileName: vendorFileName,
     folders: {
         gulpTasks: gulpTasks,

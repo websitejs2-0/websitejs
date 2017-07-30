@@ -209,7 +209,7 @@ rules:
 
   # enforce whether or not a space should be included before a brace ({) (default true)
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/space-before-brace.md
-  space-before-brace: 2
+  space-before-brace: 0
 
   # enforce whether or not a space should be included before a bang (!) (default true)
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/space-before-bang.md

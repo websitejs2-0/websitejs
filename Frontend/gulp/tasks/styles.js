@@ -5,12 +5,12 @@ var path = require('path'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     sourcemaps = require('gulp-sourcemaps'),
+    cssglob = require('gulp-css-globbing'),
     sass = require('gulp-sass'),
     sasslint = require('gulp-sass-lint'),
     postcss = require('gulp-postcss'),
     autoprefixer = require('autoprefixer'),
     cssnano = require('gulp-cssnano'),
-    strip = require('gulp-strip-comments'),
     rename = require('gulp-rename');
 
 /**
@@ -18,7 +18,7 @@ var path = require('path'),
  * @param {function} done Callback.
  */
 function cleanStyles(done) {
-    del([path.join(config.folders.build.css, config.cssFileName + '.{min.css,min.css.map,css}'), '!' + config.folders.build.css]).then(function(paths) {
+    del([path.join(config.folders.build.css, '*.{min.css,min.css.map,css}'), '!' + config.folders.build.css]).then(function(paths) {
         if (process.env.DEBUG === 'true' && paths.length > 0) {
             gutil.log('Cleaned:\n', paths.join('\n'));
         }
@@ -32,20 +32,12 @@ function cleanStyles(done) {
  */
 function compileStyles(done) {
 
-    var nanoOptions = {
-        discardComments: {
-            removeAll: true
-        },
-        zindex: false,
-        discardUnused: false,
-        mergeIdents: false,
-        reduceIdents: false,
-        safe: true,
-        autoprefixer: false
-    };
-
-    gulp.src(path.join(config.folders.src.root, config.cssFileName + '.{scss,sass}'))
+    gulp.src(path.join(config.folders.src.root, '*.{scss,sass}'))
         .pipe((process.env.NODE_ENV !== 'production') ? sourcemaps.init() : gutil.noop())
+        .pipe(cssglob({ 
+            extensions: ['.scss'], 
+            ignoreFolders: ['.', './scss'] 
+        }))
         .pipe(sasslint({
             configFile: './.sass-lint.yml'
         }))
@@ -67,8 +59,20 @@ function compileStyles(done) {
             autoprefixer()
         ]))
         .pipe((process.env.NODE_ENV !== 'production') ? gulp.dest(config.folders.build.css) : gutil.noop())
-        .pipe(cssnano(nanoOptions))
-        .pipe(strip())
+        .pipe(cssnano({
+            discardComments: {
+                removeAll: true
+            },
+            zindex: false,
+            discardUnused: false,
+            mergeIdents: false,
+            reduceIdents: false,
+            safe: true,
+            autoprefixer: false
+        }).on('error', function(err) {
+            gutil.log('%s: %s', chalk.red('CSSNano issue'), chalk.white(err.messageOriginal));
+            this.emit('end');
+        }))
         .pipe(rename({
             suffix: '.min'
         }))
@@ -82,7 +86,7 @@ function compileStyles(done) {
  */
 function watchStyles() {
     gulp.watch([
-        path.join(config.folders.src.root, config.cssFileName + '.{scss,sass}'),
+        path.join(config.folders.src.root, '*.{scss,sass}'),
         path.join(config.folders.src.css, '**/*.{scss,sass}'),
         path.join(config.folders.src.objects, '**/*.{scss,sass}'),
         path.join(config.folders.src.components, '**/*.{scss,sass}')

@@ -1,1 +1,0 @@
-if applicable, thematic styles are placed here (e.g. seasonal Christmas theme)
