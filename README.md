@@ -112,9 +112,12 @@ It uses Handlebars to render templates and updates on the fly. No preprocessing 
 The server watches all project files and will auto-reload when changes are detected.
 To start the server use
 ```sh
-$ npm start
+$ gulp serve [--production, --debug]
 ``` 
 The server auto-detects a free port (from port number 3000 and up) and is run in development (NODE_ENV) mode.
+
+To start the server only use ```$ gulp server``` or ```$ npm start```
+
 
 <!-- ## Jasmine testing
 To start unit tests run

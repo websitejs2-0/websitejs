@@ -7,6 +7,7 @@ var path = require('path'),
     chalk = require('chalk'),
     express = require('express'),
     exphbs = require('express-handlebars'),
+    helpers = require('./helpers/helpers.js'),
     favicon = require('serve-favicon'),
     bs = require('browser-sync').create(),
     app = express();
@@ -32,7 +33,8 @@ var hbs = exphbs.create({
     defaultLayout: path.join(__dirname, 'views', 'layouts', 'master'),
     partialsDir: [path.join(__dirname, 'views', 'partials')],
     layoutsDir: [path.join(__dirname, 'views', 'layouts')],
-    extname: '.html'
+    extname: '.html',
+    helpers: helpers
 });
 
 // configure server to use handlebars
@@ -63,7 +65,36 @@ app.get('/', function(req, res) {
             title: config.project.name
         },
         project: config.project,
-        paths: config.server.paths
+        environment: process.env.NODE_ENV,
+        debug: process.env.DEBUG,
+        paths: config.server.paths,
+        pages: [{
+            name: 'homepage',
+            type: 'homepage',
+            path: 'pages/homepage.html'
+        },{
+            name: 'dealerpage',
+            type: 'dealerpage',
+            path: 'pages/dealerpage.html'
+        }],
+        components: [{
+            name: 'header',
+            type: 'header',
+            path: 'components/header.html'
+        },{
+            name: 'footer',
+            type: 'footer',
+            path: 'components/footer.html'
+        }],
+        objects: [{
+            name: 'buttons',
+            type: 'buttons',
+            path: 'objects/buttons.html'
+        },{
+            name: 'loader',
+            type: 'loader',
+            path: 'objects/loader.html'
+        }]
     });
 });
 
