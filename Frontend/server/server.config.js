@@ -31,7 +31,7 @@ var server = {
 
     filesToWatch: [
         path.join(__dirname, 'views', '**/*.html'),
-        path.join(config.folders.build.root, '**/*.{js, css}'),
+        path.join(config.folders.build.root, '**/*.{min.js,min.css}'),
         path.join(config.folders.src.objects, '**/*.html'),
         path.join(config.folders.src.components, '**/*.html')        
     ]

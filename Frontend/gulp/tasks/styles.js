@@ -82,7 +82,7 @@ function compileStyles(done) {
 }
 
 /**
- * Watches assets images folder for changes.
+ * Watches sass file, objects and components folders for changes.
  */
 function watchStyles() {
     gulp.watch([

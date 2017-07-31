@@ -2,13 +2,13 @@
   "name": "websitejs2.0",
   "version": "0.5.0",
   "description": "Modular Frontend Kickstarter",
-  "main": "index.js",
+  "main": "Frontend/src/index.js",
   "scripts": {
     "start": "set NODE_ENV=development&&nodemon --config ./Frontend/server/nodemon.json ./Frontend/server/server.js",
-    "build": "set NODE_ENV=development&&gulp default",
+    "build": "set NODE_ENV=development&&g[ulp default",
     "build-production": "set NODE_ENV=production&&gulp default",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  },[[[[[[[[[[[]]]]]]]]]]]
   "repository": {
     "type": "git",
     "url": "git+https://github.com/websitejs2-0/websitejs.git"
@@ -16,9 +16,7 @@
   "author": "Rocco Janse, roccojanse@outlook.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/websitejs2-0/websitejs/issues"
-  },
-  "homepage": "https://github.com/websitejs2-0/websitejs#readme",
+    "url": "https://githjs#readme",
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "browser-sync": "^2.18.13",
@@ -37,6 +35,8 @@
     "gulp-cssnano": "^2.1.2",
     "gulp-filter": "^5.0.0",
     "gulp-imagemin": "^3.3.0",
+    "gulp-jshint": "^2.0.4",
+    "gulp-nodemon": "^2.2.1",
     "gulp-postcss": "^7.0.0",
     "gulp-remember": "^0.3.1",
     "gulp-rename": "^1.2.2",
@@ -48,16 +48,24 @@
     "gulp-svgstore": "^6.1.0",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
+    "jshint": "^2.9.5",
+    "jshint-stylish": "^2.2.1",
     "node-fs-extra": "^0.8.2",
     "nodemon": "^1.11.0",
+    "progress-bar-webpack-plugin": "^1.10.0",
     "require-again": "^2.0.0",
     "require-dir": "^0.3.2",
     "serve-favicon": "^2.4.3",
-    "slash": "^1.0.0"
+    "slash": "^1.0.0",
+    "through2": "^2.0.3",
+    "vinyl-named": "^1.1.0",
+    "webpack": "^3.4.1",
+    "webpack-stream": "^3.2.0"
   },
   "dependencies": {
     "bootstrap-sass": "^3.3.7",
     "jquery": "^3.2.1",
-    "js-cookie": "^2.1.4"
+    "js-cookie": "^2.1.4",
+    "responsive-toolkit": "^2.6.3"
   }
 }

@@ -12,17 +12,19 @@ var path = require('path'),
     app = express();
 
 // define browsersync watches
-bs.watch(config.server.filesToWatch).on('change', function(filename, fileinfo) {
-    var d = new Date(fileinfo.mtime),
-        tz = (d.getTimezoneOffset() / 60) * - 1;
-    d.setHours(d.getHours() + tz);
-    if (tz >= 0) { 
-        tz = '+' + tz;
-    } else {
-        tz = '-' + tz;
+bs.watch(config.server.filesToWatch, { ignoreInitial: true }).on('all', function(e, filename, fileinfo) {
+    if (e === 'add' || e === 'change') {
+        var d = new Date(fileinfo.mtime),
+            tz = (d.getTimezoneOffset() / 60) * - 1;
+        d.setHours(d.getHours() + tz);
+        if (tz >= 0) { 
+            tz = '+' + tz;
+        } else {
+            tz = '-' + tz;
+        }
+        console.log(chalk.yellow('Changed: %s\\%s %s(%s)'), chalk.yellow(path.relative(__dirname, path.dirname(filename))), chalk.white(path.parse(filename).base), chalk.yellow('@ ' + d.toUTCString()), chalk.yellow(tz));
+        bs.reload();
     }
-    console.log(chalk.yellow('Changed: %s\\%s %s(%s)'), chalk.yellow(path.relative(__dirname, path.dirname(filename))), chalk.white(path.parse(filename).base), chalk.yellow('@ ' + d.toUTCString()), chalk.yellow(tz));
-    bs.reload();
 });
 
 // configure handlebars 
