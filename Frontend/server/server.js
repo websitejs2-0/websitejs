@@ -62,11 +62,7 @@ app.get('/', function(req, res) {
         meta: {
             title: config.project.name
         },
-        project: {
-            title: config.project.name,
-            version: config.project.version,
-            description: config.project.description
-        },
+        project: config.project,
         paths: config.server.paths
     });
 });

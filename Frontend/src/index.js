@@ -14,7 +14,8 @@ $(function() {
 
     $('[data-toggle = "tooltip"]').tooltip(); 
 
-    console.log('COOKIE!@@@@@!!!!!!!@!@!!@', cookie);
+    console.log('COOKIE!', cookie);
+
 });
 
 $(window).resize(

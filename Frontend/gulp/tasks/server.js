@@ -1,16 +1,26 @@
-// var cp = require('child_process'),
-//     gulp = require('gulp'),
-//     nodemon = require('nodemon');
+var gulp = require('gulp'),
+    nodemon = require('gulp-nodemon');
 
-// function startServer() {
-//     // return nodemon({
-//     //     script: './Frontend/server/server.js' 
-//     // });
-//     return cp.exec('node ./Frontend/server/server.js');
-// }
+/**
+ * Starts a development server
+ * @param {function} done 
+ */
+function startServer() {
+    nodemon({
+        verbose: false,
+        script: './Frontend/server/server.js',
+        env: {
+            'NODE_ENV': process.env.NODE_ENV
+        },
+        watch: [
+            "/Frontend/server/server.config.js",
+            "/Frontend/server/server.js",
+            "/package.json"
+        ]
+    });
+}
 
-// // define tasks and add task information
-// gulp.task('server:start', gulp.parallel(startServer, 'watch'));
-// var server = gulp.task('server:start');
-// server.displayName = 'server:start';
-// server.description = 'Starts a development server in a new child process.';
+gulp.task('server:start', gulp.parallel(startServer));
+var server = gulp.task('server:start');
+server.displayName = 'server:start';
+server.description = 'Starts the development server.';

@@ -8,7 +8,9 @@ var path = require('path'),
     project = {
         name: pkg.name,
         version: pkg.version,
-        description: pkg.description
+        description: pkg.description,
+        jqversion: pkg.dependencies.jquery.replace('^', ''),
+        bsversion: pkg.dependencies['bootstrap-sass'].replace('^', '')
     },
 
     // current working dir, root folders

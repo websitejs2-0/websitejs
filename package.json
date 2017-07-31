@@ -5,10 +5,10 @@
   "main": "Frontend/src/index.js",
   "scripts": {
     "start": "set NODE_ENV=development&&nodemon --config ./Frontend/server/nodemon.json ./Frontend/server/server.js",
-    "build": "set NODE_ENV=development&&g[ulp default",
+    "build": "set NODE_ENV=development&&gulp default",
     "build-production": "set NODE_ENV=production&&gulp default",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },[[[[[[[[[[[]]]]]]]]]]]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/websitejs2-0/websitejs.git"
@@ -16,7 +16,9 @@
   "author": "Rocco Janse, roccojanse@outlook.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://githjs#readme",
+    "url": "https://github.com/websitejs2-0/websitejs/issues"
+  },
+  "homepage": "https://github.com/websitejs2-0/websitejs#readme",
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "browser-sync": "^2.18.13",
