@@ -1,6 +1,6 @@
 {
   "name": "websitejs2.0",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "description": "Modular Frontend Kickstarter",
   "main": "Frontend/src/index.js",
   "scripts": {
