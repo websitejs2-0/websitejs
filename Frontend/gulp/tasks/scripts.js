@@ -9,7 +9,6 @@ var path = require('path'),
     through = require('through2'),    
     named = require('vinyl-named'),
     jshint = require('gulp-jshint'),
-    rename = require('gulp-rename'),
     sourcemaps = require('gulp-sourcemaps');
 
 /**
@@ -30,8 +29,8 @@ function cleanScripts(done) {
  * @param {function} done Callback.
  */
 function compileScripts(done) {
-    gulp.src([path.join(config.folders.src.root, 'index.js')])
-        .pipe(named())
+    gulp.src([path.join(config.folders.src.root, '*.js')])
+        .pipe(named(function(file) { return 'bundle.min'; }))
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(webpackStream(require(path.join(config.cwd, 'gulp', 'webpack.config.js')), webpack, function(err, stats) {
@@ -42,10 +41,6 @@ function compileScripts(done) {
                 gutil.log('%s: %s', chalk.red('Webpack issue'), chalk.white(err));
                 this.emit('end');
             }
-        }))
-        .pipe(rename({
-            basename: 'bundle',
-            suffix: '.min'
         }))
         .pipe(sourcemaps.init({ 
             loadMaps: true 

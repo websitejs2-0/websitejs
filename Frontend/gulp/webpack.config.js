@@ -12,7 +12,17 @@ module.exports = {
             jQuery: 'jquery',
             viewport: 'responsive-toolkit'
         }),
-        new webpack.optimize.UglifyJsPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            //include: /\.min\.js$/,
+            minimize: true,
+            parallel: {
+                cache: true,
+                workers: 2
+            },
+            output: {
+                comments: function() { return false; }
+            }
+        }),
         new ProgressBarPlugin()
     ]
 };

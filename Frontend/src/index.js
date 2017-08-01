@@ -1,25 +1,19 @@
-require('../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js');
-var cookie = require('../../node_modules/js-cookie/src/js.cookie.js');
+require('bootstrap-sass/assets/javascripts/bootstrap/dropdown.js');
+var _ = require('lodash'),
+    salute = require('./js/modules/salute.js');
 
 $(function() { 
     
     $('.dropdown-toggle').dropdown();
 
-    $collapsible = $('#collapseExample');
-
-    $('[href="#collapseExample"], [data-target="#collapseExample"]').on('click', function(e) {
-        e.preventDefault();
-        $collapsible.collapse('toggle');
-    });
-
-    $('[data-toggle = "tooltip"]').tooltip(); 
-
-    console.log('COOKIE!', cookie);
+    console.log(salute.getSalute() + ' world!');
 
 });
 
-$(window).resize(
-    viewport.changed(function() {
+$(window).on('resize', _.debounce(function() {
+    console.log('resized');
+    //viewport.changed(function() {
         console.log('Current breakpoint: ', viewport.current());
-    })
-);
+    //});
+
+}, 200));
