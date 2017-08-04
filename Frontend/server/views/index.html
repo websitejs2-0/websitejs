@@ -1,94 +1,26 @@
-{{!< master}}
-
 <div class="container-fluid">
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-8 col-md-offset-2">
 
-                <div class="dropdown">
-                    <button id="dLabel" class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown trigger
-                    <span class="caret"></span>
-                </button>
-                    <ul class="dropdown-menu" aria-labelledby="dLabel">
-                        <li>dropdown1</li>
-                        <li>dropdown2</li>
-                        <li>dropdown3</li>
-                        <li>dropdown4</li>
-                        <li>dropdown5</li>
-                        <li>dropdown6</li>
-                        <li>dropdown7</li>
-                    </ul>
+                <div class="page-header project-index">
+                    <h1>{{ project.name }}<br /><small>{{ project.description }}</small></h1>
+                    <p>{{ environment }} build version {{ project.version }}{{#compare debug "true"}} (debug mode){{/compare}} | jQuery version {{ project.jqversion }} | Bootstrap version {{ project.bsversion }}</p>
                 </div>
 
-                <div class="page-header">
-                    <h1>{{ project.name }} version {{ project.version }}<br><small>Project index</small></h1>
-                    <h2>{{ project.description }}</h2>
-                    <p>{{ environment }} build{{#compare debug "true"}} (debug mode){{/compare}} | jQuery version {{ project.jqversion }} | Bootstrap version {{ project.bsversion }}</p>
+                <div class="list-group">
+                    <a class="list-group-item" href="/styleguide">
+                        <h3 class="list-group-item-heading">Styleguide</h3>
+                        <p class="list-group-item-text">View all available objects and components</p></a>
+                    <a class="list-group-item" href="/icon-manager">
+                        <h3 class="list-group-item-heading">Icon Manager</h3>
+                        <p class="list-group-item-text">Manage which icons will be included in the project</p>
+                    </a>
+                    <a class="list-group-item" href="/docs">
+                        <h3 class="list-group-item-heading">Documentation</h3>
+                        <p class="list-group-item-text">Technical project documentation</p>
+                    </a>
                 </div>
-
-                {{#if pages}}
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th class="col-xs-6 col-md-3">Page</th>
-                                <th class="col-xs-6 col-md-9">Location</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{#each pages}}
-                            <tr>
-                                <td>{{ name }}</td>
-                                <td><a href="../{{ path }}">src/styleguide/{{ type }}</a></td>
-                            </tr>
-                            {{/each}}
-                        </tbody>
-                    </table>
-                </div>
-                {{/if}}
-
-                {{#if components}}
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th class="col-xs-6 col-md-3">Component</th>
-                                <th class="col-xs-6 col-md-9">Location</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{#each components}}
-                            <tr>
-                                <td>{{ name }}</td>
-                                <td><a href="../{{ path }}">src/styleguide/{{ type }}</a></td>
-                            </tr>
-                            {{/each}}
-                        </tbody>
-                    </table>
-                </div>
-                {{/if}}
-
-                {{#if objects}}
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th class="col-xs-6 col-md-3">Object</th>
-                                <th class="col-xs-6 col-md-9">Location</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{#each objects}}
-                            <tr>
-                                <td>{{ name }}</td>
-                                <td><a href="../{{ path }}">src/styleguide/{{ type }}</a></td>
-                            </tr>
-                            {{/each}}
-                        </tbody>
-                    </table>
-                </div>
-                {{/if}}
 
             </div>
         </div>

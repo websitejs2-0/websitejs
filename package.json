@@ -52,6 +52,7 @@
     "gulp-util": "^3.0.8",
     "jshint": "^2.9.5",
     "jshint-stylish": "^2.2.1",
+    "mixin-deep": "^1.2.0",
     "node-fs-extra": "^0.8.2",
     "nodemon": "^1.11.0",
     "progress-bar-webpack-plugin": "^1.10.0",
@@ -68,6 +69,7 @@
     "bootstrap-sass": "^3.3.7",
     "jquery": "^3.2.1",
     "js-cookie": "^2.1.4",
+    "material-design-icons": "^3.0.1",
     "responsive-toolkit": "^2.6.3"
   }
 }

@@ -7,11 +7,12 @@
         <meta name="theme-color" content="{{ theme.color }}">
         <title>{{ meta.title }}</title>
 
-        <link rel="stylesheet" href="/{{ paths.css }}/server.min.css">
-    </head>
+        {{>headerscripts}}
     <body>
 
         {{{body}}}
 
+        {{>svginject}}
+        {{>footerscripts}}
     </body>
 </html>

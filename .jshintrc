@@ -1,4 +1,11 @@
 {
     "node": true,
-    "unused": true
+    "unused": true,
+    "globals": {
+        "document": true,
+        "window": true,
+        "$": true,
+        "jQuery": true,
+        "viewport": true
+    }
 }

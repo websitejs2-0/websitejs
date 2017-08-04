@@ -15,8 +15,8 @@ var path = require('path'),
  * Cleans scripts bundle file.
  * @param {function} done Callback.
  */
-function cleanScripts(done) {
-    del([path.join(config.folders.build.js, 'bundle.{min.js,min.js.map,js}'), path.join('!' + config.folders.build.js, 'server.{min.js,min.js.map,js}'), '!' + config.folders.build.js]).then(function(paths) {
+function cleanServerScripts(done) {
+    del([path.join(config.folders.build.js, 'server.{min.js,min.js.map,js}'), '!' + config.folders.build.js]).then(function(paths) {
         if (process.env.DEBUG === 'true' && paths.length > 0) {
             gutil.log('Cleaned:\n', paths.join('\n'));
         }
@@ -28,10 +28,10 @@ function cleanScripts(done) {
  * Compiles scripts bundle file from source.
  * @param {function} done Callback.
  */
-function compileScripts(done) {
+function compileServerScripts(done) {
 
-    gulp.src([path.join(config.folders.src.root, '*.js'), path.join('!' + config.folders.src.root, 'server.js')])
-        .pipe(named(function() { return 'bundle.min'; }))
+    gulp.src([path.join(config.folders.src.root, 'server.js')])
+        .pipe(named(function() { return 'server.min'; }))
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(webpackStream(require(path.join(config.cwd, 'gulp', 'webpack.config.js')), webpack, function(err, stats) {
@@ -61,23 +61,21 @@ function compileScripts(done) {
 /**
  * Watches scripts, objects and components folders for changes.
  */
-function watchScripts() {
+function watchServerScripts() {
     gulp.watch([
-        path.join(config.folders.src.root, '*.js'),
-        path.join('!' + config.folders.src.root, 'server.js'),
-        path.join(config.folders.src.js, 'libs', '**/*.js'),
+        path.join(config.folders.src.root, 'server.js'),
         path.join(config.folders.src.objects, '**/*.js'),
         path.join(config.folders.src.components, '**/*.js')
     ], { ignorePermissionErrors: true }, gulp.series('scripts'));
 }
 
 // define tasks and add task information
-gulp.task('scripts', gulp.series(cleanScripts, compileScripts));
-var scripts = gulp.task('scripts');
-scripts.displayName = 'scripts';
-scripts.description = 'Compiles scripts bundle file from source.';
+gulp.task('scripts:server', gulp.series(cleanServerScripts, compileServerScripts));
+var serverScripts = gulp.task('scripts:server');
+serverScripts.displayName = 'scripts:server';
+serverScripts.description = 'Compiles server scripts bundle file from source.';
 
-gulp.task('scripts:watch', gulp.series(watchScripts));
-var scriptsWatch = gulp.task('scripts:watch');
-scriptsWatch.displayName = 'scripts:watch';
-scriptsWatch.description = 'Watches scripts, objects and components folders for changes';
+gulp.task('scripts:server:watch', gulp.series(watchServerScripts));
+var serverScriptsWatch = gulp.task('scripts:server:watch');
+serverScriptsWatch.displayName = 'scripts:server:watch';
+serverScriptsWatch.description = 'Watches server scripts, objects and components folders for changes';

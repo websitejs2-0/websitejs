@@ -13,8 +13,8 @@ function startServer() {
             'NODE_ENV': process.env.NODE_ENV
         },
         watch: [
-            "/Frontend/server/server.config.js",
-            "/Frontend/server/server.js",
+            "/Frontend/server/**/*.js",
+            "/Frontend/gulp/tasks/server.js",
             "/package.json"
         ]
     });

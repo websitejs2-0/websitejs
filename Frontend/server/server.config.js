@@ -12,7 +12,8 @@ var server = {
             path.join(__dirname, 'views'),
             config.folders.src.objects,
             config.folders.src.components
-        ]
+        ],
+        routers: path.join(__dirname, 'routers')
     },
 
     paths: {

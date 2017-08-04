@@ -1,7 +1,0 @@
-{
-    "watch": [
-        "/Frontend/server/server.config.js",
-        "/Frontend/server/server.js",
-        "/package.json"
-    ]
-}

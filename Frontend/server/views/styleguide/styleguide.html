@@ -1,0 +1,85 @@
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-8 col-md-offset-2">
+
+                <div class="page-header project-index">
+                    <h1>{{ project.name }}<br /><small>{{ project.description }}</small></h1>
+                    <p>{{ environment }} build version {{ project.version }}{{#compare debug "true"}} (debug mode){{/compare}} | jQuery version {{ project.jqversion }} | Bootstrap version {{ project.bsversion }}</p>
+                </div>
+
+                <div class="page-header">
+                    <h3>Styleguide</h3>
+                </div>
+                
+                {{#if pages}}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-6 col-md-3">Page</th>
+                                <th class="col-xs-6 col-md-9">Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each pages}}
+                            <tr>
+                                <td>{{ name }}</td>
+                                <td><a href="../{{ path }}">src/styleguide/{{ type }}</a></td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                {{/if}}
+
+                {{#if components}}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-6 col-md-3">Component</th>
+                                <th class="col-xs-6 col-md-3">Type</th>
+                                <th class="col-xs-6 col-md-6">Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each components}}
+                            <tr>
+                                <td><a href="/styleguide/components/{{type}}/{{name}}">{{name}}</a></td>
+                                <td>{{type}}</td>
+                                <td>/src/components/{{relPath}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                {{/if}}
+
+                {{#if objects}}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-6 col-md-3">Object</th>
+                                <th class="col-xs-6 col-md-3">Type</th>
+                                <th class="col-xs-6 col-md-6">Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each objects}}
+                            <tr>
+                                <td><a href="/styleguide/objects/{{type}}/{{name}}">{{name}}</a></td>
+                                <td>{{type}}</td>
+                                <td>/src/objects/{{relPath}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                {{/if}}
+
+            </div>
+        </div>
+    </div>
+</div>

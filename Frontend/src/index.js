@@ -1,7 +1,11 @@
+'use strict';
+
+// requires
 require('bootstrap-sass/assets/javascripts/bootstrap/dropdown.js');
 var _ = require('lodash'),
-    salute = require('./js/modules/salute.js');
+    salute = require('./js/libs/salute.js');
 
+// main logic
 $(function() { 
     
     $('.dropdown-toggle').dropdown();
@@ -10,10 +14,9 @@ $(function() {
 
 });
 
+// window events
 $(window).on('resize', _.debounce(function() {
-    console.log('resized');
-    //viewport.changed(function() {
+
         console.log('Current breakpoint: ', viewport.current());
-    //});
 
 }, 200));

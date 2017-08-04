@@ -6,11 +6,6 @@ var fileName = 'vendor',
     // include script paths
     scripts = [
 
-        // jquery and plugins
-        'node_modules/jquery/dist/jquery.min.js',
-
-        // various libs
-        'node_modules/js-cookie/src/js.cookie.js'
     ],
 
     // include style paths

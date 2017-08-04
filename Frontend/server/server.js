@@ -1,13 +1,16 @@
 'use strict';
 
 var path = require('path'),
+    fs = require('fs'),
+    requireDir = require('require-dir'),
     config = require('./server.config.js'),
+    dateFormat = require('../src/js/libs/date-formatter'),
     devIp = require('dev-ip'),
     findPort = require('find-free-port'),
     chalk = require('chalk'),
     express = require('express'),
     exphbs = require('express-handlebars'),
-    helpers = require('./helpers/helpers.js'),
+    helpers = require('./hbs-helpers/helpers.js'),
     favicon = require('serve-favicon'),
     bs = require('browser-sync').create(),
     app = express();
@@ -15,24 +18,28 @@ var path = require('path'),
 // define browsersync watches
 bs.watch(config.server.filesToWatch, { ignoreInitial: true }).on('all', function(e, filename, fileinfo) {
     if (e === 'add' || e === 'change') {
-        var d = new Date(fileinfo.mtime),
-            tz = (d.getTimezoneOffset() / 60) * - 1;
-        d.setHours(d.getHours() + tz);
-        if (tz >= 0) { 
-            tz = '+' + tz;
-        } else {
-            tz = '-' + tz;
-        }
-        console.log(chalk.yellow('Changed: %s\\%s %s(%s)'), chalk.yellow(path.relative(__dirname, path.dirname(filename))), chalk.white(path.parse(filename).base), chalk.yellow('@ ' + d.toUTCString()), chalk.yellow(tz));
+        var date = dateFormat.localTimezone(fileinfo.mtime);
+        console.log(chalk.yellow('Changed: %s\\%s %s'), chalk.yellow(path.relative(__dirname, path.dirname(filename))), chalk.white(path.parse(filename).base), chalk.yellow('@ ' + date));
         bs.reload();
     }
 });
 
+// create partials dir array
+var partialsDirs = [path.join(__dirname, 'views', 'partials'), config.folders.src.objects, config.folders.src.components],
+    partialsObjectsDirs = fs.readdirSync(config.folders.src.objects),
+    partialsComponentsDirs = fs.readdirSync(config.folders.src.components);
+for (var i = 0; i < partialsObjectsDirs.length; i++) {
+    partialsDirs.push(path.join(config.folders.src.objects, partialsObjectsDirs[i]));
+}
+for (var j = 0; j < partialsComponentsDirs.length; j++) {
+    partialsDirs.push(path.join(config.folders.src.objects, partialsComponentsDirs[j]));
+}
+
 // configure handlebars 
 var hbs = exphbs.create({
-    defaultLayout: path.join(__dirname, 'views', 'layouts', 'master'),
-    partialsDir: [path.join(__dirname, 'views', 'partials')],
-    layoutsDir: [path.join(__dirname, 'views', 'layouts')],
+    partialsDir: partialsDirs,
+    layoutsDir: path.join(__dirname, 'views', 'layouts'),
+    defaultLayout: 'master',
     extname: '.html',
     helpers: helpers
 });
@@ -51,10 +58,9 @@ app.use(express.static(config.server.root));
 // favicon
 app.use(favicon(path.join(config.server.root, 'assets', 'icons', 'favicon.ico')));
 
-// // routers
-// var routers = {
-//     styleguide: require(path.join(config.paths.routers, 'styleguide'))
-// };
+// routers
+var routers = requireDir(config.server.folders.routers);
+app.use('/styleguide', routers.styleguide);
 
 // routing
 app.get('/', function(req, res) {
@@ -65,40 +71,12 @@ app.get('/', function(req, res) {
             title: config.project.name
         },
         project: config.project,
+        theme: { color: '#000000' },
         environment: process.env.NODE_ENV,
         debug: process.env.DEBUG,
-        paths: config.server.paths,
-        pages: [{
-            name: 'homepage',
-            type: 'homepage',
-            path: 'pages/homepage.html'
-        },{
-            name: 'dealerpage',
-            type: 'dealerpage',
-            path: 'pages/dealerpage.html'
-        }],
-        components: [{
-            name: 'header',
-            type: 'header',
-            path: 'components/header.html'
-        },{
-            name: 'footer',
-            type: 'footer',
-            path: 'components/footer.html'
-        }],
-        objects: [{
-            name: 'buttons',
-            type: 'buttons',
-            path: 'objects/buttons.html'
-        },{
-            name: 'loader',
-            type: 'loader',
-            path: 'objects/loader.html'
-        }]
+        paths: config.server.paths
     });
 });
-
-// app.use('/styleguide', routers.styleguide);
 
 // find free port and set up server
 var port = process.env.PORT;

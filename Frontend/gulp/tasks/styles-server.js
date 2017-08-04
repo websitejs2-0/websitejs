@@ -17,8 +17,8 @@ var path = require('path'),
  * Cleans compiled css file.
  * @param {function} done Callback.
  */
-function cleanStyles(done, files) {
-    del([path.join(config.folders.build.css, '*.{min.css,min.css.map,css}'), path.join('!' + config.folders.build.css, 'server.{min.css,min.css.map,css}'), '!' + config.folders.build.css]).then(function(paths) {
+function cleanServerStyles(done) {
+    del([path.join(config.folders.src.root, 'server.{min.css,min.css.map,css}'), '!' + config.folders.build.css]).then(function(paths) {
         if (process.env.DEBUG === 'true' && paths.length > 0) {
             gutil.log('Cleaned:\n', paths.join('\n'));
         }
@@ -30,9 +30,9 @@ function cleanStyles(done, files) {
  * Compiles css file from sass source.
  * @param {function} done Callback.
  */
-function compileStyles(done) {
+function compileServerStyles(done) {
 
-    gulp.src([path.join(config.folders.src.root, '*.{scss,sass}'), path.join('!' + config.folders.src.root, 'server.{scss,sass}')])
+    gulp.src(path.join(config.folders.src.root, 'server.{scss,sass}'))
         .pipe((process.env.NODE_ENV !== 'production') ? sourcemaps.init() : gutil.noop())
         .pipe(cssglob({ 
             extensions: ['.scss'], 
@@ -84,10 +84,9 @@ function compileStyles(done) {
 /**
  * Watches sass file, objects and components folders for changes.
  */
-function watchStyles() {
+function watchServerStyles() {
     gulp.watch([
-        path.join(config.folders.src.root, '*.{scss,sass}'),
-        path.join('!' + config.folders.src.root, 'server.{scss,sass}'),
+        path.join(config.folders.src.root, 'server.{scss,sass}'),
         path.join(config.folders.src.css, '**/*.{scss,sass}'),
         path.join(config.folders.src.objects, '**/*.{scss,sass}'),
         path.join(config.folders.src.components, '**/*.{scss,sass}')
@@ -95,12 +94,12 @@ function watchStyles() {
 }
 
 // define tasks and add task information
-gulp.task('styles', gulp.series(cleanStyles, compileStyles));
-var styles = gulp.task('styles');
-styles.displayName = 'styles';
-styles.description = 'Compiles css file from sass source.';
+gulp.task('styles:server', gulp.series(cleanServerStyles, compileServerStyles));
+var serverStyles = gulp.task('styles:server');
+serverStyles.displayName = 'styles:server';
+serverStyles.description = 'Compiles css for the server.';
 
-gulp.task('styles:watch', gulp.parallel(watchStyles));
-var stylesWatch = gulp.task('styles:watch');
-stylesWatch.displayName = 'styles:watch';
-stylesWatch.description = 'Watches sass file, objects and components folders for changes.';
+gulp.task('styles:server:watch', gulp.parallel(watchServerStyles));
+var serverStylesWatch = gulp.task('styles:server:watch');
+serverStylesWatch.displayName = 'styles:server:watch';
+serverStylesWatch.description = 'Watches server sass file, objects and components folders for changes.';

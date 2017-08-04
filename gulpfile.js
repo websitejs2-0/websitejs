@@ -27,3 +27,5 @@ gulp.task('default', gulp.series(gulp.parallel('assets', 'svgicons', 'vendor'), 
 
 gulp.task('watch', gulp.parallel('styles:watch', 'scripts:watch', 'assets:watch', 'svgicons:watch'));
 gulp.task('serve', gulp.parallel('server:start', 'watch'));
+
+gulp.task('build-server', gulp.parallel('styles:server', 'scripts:server'));

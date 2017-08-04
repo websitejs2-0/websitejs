@@ -1,0 +1,37 @@
+$font-size-base:            14px;
+$line-height-base:          1.428571429;
+
+// breakpoints
+$xs:                        em(480px);
+$screen-xs:                 $xs;
+$screen-xs-min:             $screen-xs;
+
+$sm:                        em(768px);
+$screen-sm:                 $sm;
+$screen-sm-min:             $screen-sm;
+
+$md:                        em(992px);
+$screen-md:                 $md;
+$screen-md-min:             $screen-md;
+
+$lg:                        em(1200px);
+$screen-lg:                 $lg;
+$screen-lg-min:             $screen-lg;
+
+// grid
+$grid-columns:              12;
+$grid-gutter-width:         20px;
+
+// container widths
+$container-tablet:          (720px + $grid-gutter-width);
+$container-sm:              $container-tablet;
+
+$container-desktop:         (940px + $grid-gutter-width);
+$container-md:              $container-desktop;
+
+$container-large-desktop:   (1140px + $grid-gutter-width);
+$container-lg:              $container-large-desktop;
+
+// nav breakpoints
+$grid-float-breakpoint:     $sm;
+$grid-float-breakpoint-max: ($grid-float-breakpoint - 1);
