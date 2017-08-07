@@ -6,10 +6,8 @@ var path = require('path'),
     gutil = require('gulp-util'),
     webpackStream = require('webpack-stream'),
     webpack = require('webpack'),
-    through = require('through2'),    
     named = require('vinyl-named'),
-    jshint = require('gulp-jshint'),
-    sourcemaps = require('gulp-sourcemaps');
+    jshint = require('gulp-jshint');
 
 /**
  * Cleans scripts bundle file.
@@ -43,17 +41,6 @@ function compileScripts(done) {
                 this.emit('end');
             }
         }))
-        .pipe(sourcemaps.init({ 
-            loadMaps: true 
-        }))
-        .pipe(through.obj(function(file, enc, cb) {
-            // Dont pipe through any source map files as it will be handled
-            // by gulp-sourcemaps
-            var isSourceMap = /\.map$/.test(file.path);
-            if (!isSourceMap) this.push(file);
-            cb();
-        }))
-        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(config.folders.build.js))
         .on('finish', function() { done(); });
 }

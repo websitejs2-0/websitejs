@@ -57,8 +57,8 @@ function watchSvgIcons() {
             gutil.log(chalk.white('Updating svg icons...'));
             inProgress = true;
             setTimeout(function() {
-                clean(function() {
-                    compile(function() {
+                cleanSvgIcons(function() {
+                    compileSvgIcons(function() {
                         gutil.log(chalk.yellow('Updated svg icons file.'));
                         inProgress = false;
                     });

@@ -32,7 +32,7 @@ for (var i = 0; i < partialsObjectsDirs.length; i++) {
     partialsDirs.push(path.join(config.folders.src.objects, partialsObjectsDirs[i]));
 }
 for (var j = 0; j < partialsComponentsDirs.length; j++) {
-    partialsDirs.push(path.join(config.folders.src.objects, partialsComponentsDirs[j]));
+    partialsDirs.push(path.join(config.folders.src.components, partialsComponentsDirs[j]));
 }
 
 // configure handlebars 

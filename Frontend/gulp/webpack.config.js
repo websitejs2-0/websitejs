@@ -13,7 +13,7 @@ module.exports = {
             viewport: 'responsive-toolkit'
         }),
         new webpack.optimize.UglifyJsPlugin({
-            //include: /\.min\.js$/,
+            sourceMap: true,
             minimize: true,
             parallel: {
                 cache: true,
