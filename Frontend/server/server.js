@@ -6,7 +6,7 @@ var path = require('path'),
     config = require('./server.config.js'),
     dateFormat = require('../src/js/libs/date-formatter'),
     devIp = require('dev-ip'),
-    findPort = require('find-free-port'),
+    findPort = require('openport'),
     chalk = require('chalk'),
     express = require('express'),
     exphbs = require('express-handlebars'),
@@ -80,10 +80,10 @@ app.get('/', function(req, res) {
 
 // find free port and set up server
 var port = process.env.PORT;
-findPort(3000, 3100, '127.0.0.1', function(err, freePort) {
+findPort.find({ startingPort: 3000, endingPort: 3100, avoid: []}, function(err, freePort) {
     
     port = freePort;
-    
+
     app.listen(port, function() {
 
         console.log('\nstarting server...');
