@@ -1,6 +1,7 @@
 {
     "node": true,
     "unused": true,
+    "browser": true,
     "globals": {
         "document": true,
         "window": true,
