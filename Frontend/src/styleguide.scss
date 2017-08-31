@@ -1,13 +1,14 @@
 // ITCSS based structure
 
 // settings - Global variables, such as configs etc
-@import "./scss/settings/server-variables";
+@import "./scss/settings/styleguide-variables";
 
 // tools - Mixins and helper functions
 @import "./scss/tools/functions";
 @import "./scss/tools/mixins";
 
 // generic - Ground zero styles, reset styles such as normalize.css and bootstrap
+@import "./scss/settings/breakpoints";
 @import "./scss/generic/bootstrap";
 
 // elements - Base, unclassed html elements, 

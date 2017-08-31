@@ -8,6 +8,7 @@
 @import "./scss/tools/mixins";
 
 // generic - Ground zero styles, reset styles such as normalize.css and bootstrap
+@import "./scss/settings/breakpoints";
 @import "./scss/generic/bootstrap";
 
 // elements - Base, unclassed html elements, 
@@ -23,7 +24,7 @@
 @import "./components/**/*.scss";
 
 // themes - If applicable, thematic styles are placed here (e.g. seasonal Christmas theme)
-@import "./scss/themes/**/*.scss";
+@import "./scss/themes/default/*.scss";
 
 // trumps - Utilities, helpers and overrides. !important is often used.
 @import "./scss/trumps/utilities";

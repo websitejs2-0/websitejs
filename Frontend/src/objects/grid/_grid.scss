@@ -2,7 +2,7 @@
     padding-left: 30px;
     padding-right: 30px;
 
-    @media(min-width: $sm) {
+    @include media-breakpoint-up(sm) {
         padding-left: 20px;
         padding-right: 20px;
     }

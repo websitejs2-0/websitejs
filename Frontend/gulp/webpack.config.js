@@ -1,18 +1,30 @@
-var webpack = require('webpack');
-var ProgressBarPlugin = require('progress-bar-webpack-plugin');
+var webpack = require('webpack'),
+    UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
+    ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 module.exports = {
     devtool: 'source-map',
     module: {
-        rules: []
+        rules: [{ // es6
+            test: /\.js$/,
+            exclude: /(node_modules|bower_components)/,
+            // include: ['./node_modules/popper.js/'],
+            use: {
+                loader: 'babel-loader'
+                // options: {
+                //     presets: ['env']
+                // }
+            }
+        }]
     },
     plugins: [
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
-            viewport: 'responsive-toolkit'
+            viewport: 'responsive-toolkit',
+            Popper: ['popper.js', 'default']
         }),
-        new webpack.optimize.UglifyJsPlugin({
+        new UglifyJSPlugin({
             sourceMap: (process.env.NODE_ENV === 'production') ? false : true,
             minimize: true,
             parallel: {
