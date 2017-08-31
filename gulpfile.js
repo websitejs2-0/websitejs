@@ -19,13 +19,12 @@ process.argv.forEach(function(val) {
     }
 });
 
+// clear console and display current environment
 console.clear();
 console.log(chalk.yellow('\nBuild: %s %s\n'), process.env.NODE_ENV, (process.env.DEBUG === 'true') ? 'in debug mode.' : '');
 
-// register default task
+// register tasks
 gulp.task('default', gulp.series(gulp.parallel('assets', 'svgicons', 'vendor'), gulp.parallel('styles', 'scripts')));
 
 gulp.task('watch', gulp.parallel('styles:watch', 'scripts:watch', 'assets:watch', 'svgicons:watch'));
 gulp.task('serve', gulp.parallel('server:start', 'watch'));
-
-gulp.task('build-server', gulp.parallel('styles:server', 'scripts:server'));
