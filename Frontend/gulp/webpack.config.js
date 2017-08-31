@@ -13,7 +13,7 @@ module.exports = {
             viewport: 'responsive-toolkit'
         }),
         new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
+            sourceMap: (process.env.NODE_ENV === 'production') ? false : true,
             minimize: true,
             parallel: {
                 cache: true,
