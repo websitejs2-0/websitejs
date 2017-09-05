@@ -25,7 +25,7 @@ rules:
 
   # will enforce whether or not nested blocks should include a space between the last non-comment declaration or not
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/empty-line-between-blocks.md
-  empty-line-between-blocks: 2
+  empty-line-between-blocks: 0
 
   # enforce whether selectors should be placed on a new line
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/single-line-per-selector.md
