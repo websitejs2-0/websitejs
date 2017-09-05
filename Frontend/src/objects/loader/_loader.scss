@@ -16,6 +16,7 @@ $spin-duration: 0.8s;
         height: $base-line-height;
         border: .25rem solid $off-color;
         border-top-color: $color;
+        transform: translateZ(0);
         animation: spin $spin-duration infinite ease-in-out;
         @include align-center(absolute);
     }
