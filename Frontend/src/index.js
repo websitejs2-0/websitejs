@@ -1,9 +1,6 @@
 'use strict';
 
-require('bootstrap/js/dist/dropdown');
-
-var _ = require('lodash'),
-    salute = require('./js/libs/salute.js');
+var _ = require('lodash');
 
 // responsive toolkit bootstrap 4 support
 viewport.use('Bootstrap4', {
@@ -17,9 +14,7 @@ viewport.use('Bootstrap4', {
 // main logic
 $(function() { 
     
-    $('.dropdown-toggle').dropdown();
-
-    console.log(salute.getSalute() + ' world!');
+    console.log('Loaded.');
 
 });
 
