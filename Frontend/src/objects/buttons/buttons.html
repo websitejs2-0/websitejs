@@ -1,1 +1,10 @@
-<a href="{{href}}" class="btn {{#if classname}}{{classname}}{{/if}}" {{#if target}}target="{{target}}"{{/if}}>{{label}}</a>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            {{>button.object href="#" classname="btn-primary" label="Primary Button"}}
+        </div>
+        <div class="col-md-4">
+            {{>button.object href="#" classname="btn-secondary" label="Secondary Button"}}
+        </div>
+    </div>
+</div>
