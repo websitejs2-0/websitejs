@@ -1,7 +1,9 @@
 // ITCSS based structure
 
 // settings - Global variables, such as configs etc
-@import "./scss/settings/styleguide-variables";
+@import "./scss/styleguide/settings/variables";
+@import "./scss/main/settings/colors";
+@import "./scss/main/settings/typography";
 
 // tools - Mixins and helper functions
 @import "./scss/tools/functions";

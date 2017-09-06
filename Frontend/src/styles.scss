@@ -1,7 +1,9 @@
 // ITCSS based structure
 
 // settings - Global variables, such as configs etc
-@import "./scss/settings/variables";
+@import "./scss/main/settings/variables";
+@import "./scss/main/settings/colors";
+@import "./scss/main/settings/typography";
 
 // tools - Mixins and helper functions
 @import "./scss/tools/functions";
@@ -12,8 +14,8 @@
 
 // elements - Base, unclassed html elements, 
 // e.g. headings, lists, tables, this is the last layer that styles tag selectors
-@import "./scss/elements/fonts";
-@import "./scss/elements/typography";
+@import "./scss/main/elements/fonts";
+@import "./scss/main/elements/typography";
 
 // objects - No cosmetic design patterns. Class only styles from here onwards. 
 // Classes here are loosely named (e.g. .button, .list-item, grid systems etc)
@@ -22,8 +24,8 @@
 // components - Rich design UI styling. Class names here are more specific.
 @import "./components/**/*.scss";
 
-// themes - If applicable, thematic styles are placed here (e.g. seasonal Christmas theme)
-@import "./scss/themes/default/*.scss";
+// themes - If applicable, thematic styles are placed here (e.g. seasonal Christmas theme).
+@import "./scss/main/themes/**/*.scss";
 
 // trumps - Utilities, helpers and overrides. !important is often used.
 @import "./scss/trumps/utilities";
