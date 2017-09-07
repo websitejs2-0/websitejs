@@ -11,8 +11,12 @@ viewport.use('Bootstrap4', {
     'xl': $('<div class="d-none d-xl-block"></div>')
 });
 
+// enable external svg icons
+svg4everybody();
+
 // main logic
 $(function() { 
+
     
     console.log('Loaded.');
 
@@ -20,7 +24,7 @@ $(function() {
 
 // window events
 $(window).on('resize', _.debounce(function() {
-console.log('RESIZED');
-        console.log('Current breakpoint: ', viewport.current());
+    console.log('RESIZED');
+    console.log('Current breakpoint: ', viewport.current());
 
 }, 200));

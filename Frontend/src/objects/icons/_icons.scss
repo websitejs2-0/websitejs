@@ -1,5 +1,10 @@
 svg {
     &.icon {
+        margin: 0;
+        padding: 0;
         pointer-events: none;
+        width: $font-size-base;
+        height: $font-size-base;
+        vertical-align: inherit;
     }
 }

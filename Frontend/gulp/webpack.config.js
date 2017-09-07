@@ -22,7 +22,8 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery',
             viewport: 'responsive-toolkit',
-            Popper: ['popper.js', 'default']
+            Popper: ['popper.js', 'default'],
+            svg4everybody: 'svg4everybody'
         }),
         new UglifyJSPlugin({
             sourceMap: (process.env.NODE_ENV === 'production') ? false : true,

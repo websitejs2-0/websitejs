@@ -75,6 +75,7 @@
     "js-cookie": "^2.1.4",
     "material-design-icons": "^3.0.1",
     "popper.js": "^1.12.5",
-    "responsive-toolkit": "^2.6.3"
+    "responsive-toolkit": "^2.6.3",
+    "svg4everybody": "^2.1.9"
   }
 }
