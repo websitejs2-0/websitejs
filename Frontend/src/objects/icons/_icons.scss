@@ -3,8 +3,25 @@ svg {
         margin: 0;
         padding: 0;
         pointer-events: none;
-        width: $font-size-base;
-        height: $font-size-base;
+        width: $font-size-base * 1.5;
+        height: $font-size-base * 1.5;
         vertical-align: inherit;
+
+        &--big-2 {
+            width: $font-size-base * 2;
+            height: $font-size-base * 2;
+        }
+        &--big-3 {
+            width: $font-size-base * 3;
+            height: $font-size-base * 3;
+        }
+        &--big-4 {
+            width: $font-size-base * 4;
+            height: $font-size-base * 4;
+        }
+        &--big-5 {
+            width: $font-size-base * 5;
+            height: $font-size-base * 5;
+        }
     }
 }

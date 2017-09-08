@@ -4,6 +4,7 @@ var path = require('path'),
     chalk = require('chalk'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
+    glob = require('glob'),
     rename = require('gulp-rename'),
     svgmin = require('gulp-svgmin'),
     svgstore = require('gulp-svgstore');
@@ -26,9 +27,20 @@ function cleanSvgIcons(done) {
  * @param {function} done Callback.
  */
 function compileSvgIcons(done) {
-    gulp.src(path.join(config.folders.src.assets.icons.svg, '**/*.svg'), { 
-        base: config.folders.src.assets.icons.svg 
-    })
+    
+    // get icon folders to determine filenames
+    var iconFolderList = glob.sync(path.join(config.folders.src.assets.icons.svg, '*')),
+        numOfFolders = iconFolderList.length,
+        finished = 0;
+
+    // add icons of each folder into own spritesheet
+    for (var i = 0; i < numOfFolders; i++) {
+        
+        var folderName = path.relative(config.folders.src.assets.icons.svg, iconFolderList[i]);
+        
+        gulp.src(path.join(config.folders.src.assets.icons.svg, folderName, '**/*.svg'), { 
+            base: path.join(config.folders.src.assets.icons.svg, folderName)
+        })
         .pipe(svgmin())
         .pipe(rename(function(path) {
             var name = path.dirname.split(path.sep);
@@ -39,10 +51,20 @@ function compileSvgIcons(done) {
         }))        
         .pipe(svgstore())
         .pipe(rename({
-            basename: 'svgicons'    
+            basename: folderName    
         }))
         .pipe(gulp.dest(config.folders.build.assets.icons.svg))
-        .on('finish', function() { done(); });
+        /* jshint ignore:start */
+        .on('finish', function() {
+            gutil.log(chalk.yellow('Compiled svg spritesheet: %s.svg'), path.relative(config.folders.build.root, path.join(config.folders.build.assets.icons.svg, path.relative(config.folders.src.assets.icons.svg, iconFolderList[finished]))));
+            finished++;
+            if (finished === numOfFolders) {
+                done();
+            }
+        });
+        /* jshint ignore:end */
+        
+    }
 }
 
 /**

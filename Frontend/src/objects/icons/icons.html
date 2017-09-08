@@ -1,22 +1,25 @@
 <div class="container">
     <div class="row mt-5">
-        <div class="col text-center">
-            <p>This is an icon: {{> icon.object iconId="communication-ic_call_48px" iconTitle="Call" iconRole="img" }}</p>
+        <div class="col">
+            <h2>Included icons overview</h2>
+        </div>
+    </div>
+
+    {{#each folders as |folder|}}
+    <div class="row mt-5">
+        <div class="col">
+            <h5>{{ folder.name }}.svg</h5>
         </div>
     </div>
     <div class="row mt-5">
-        <div class="col text-center">
-            <button class="btn btn-primary">{{> icon.object iconId="communication-ic_chat_48px" iconTitle="Chat" iconRole="img" }} Icon on button</button>
+        {{#each icons as |icon|}}
+        <div class="col-3 col-sm-2 col-lg-1 text-center">
+            <a href="/styleguide/objects/icons/{{ folder.name }}/{{ icon.id }}">
+                {{> icon.object iconFile=folder.name iconId=icon.id iconTitle=icon.title iconRole="img" }}
+                <span class="icon-link__name small" title="{{ folder.name }}.svg#{{ icon.id }}">{{ icon.id }}</span>
+            </a>
         </div>
+        {{/each}}
     </div>
-    <div class="row mt-5">
-        <div class="col text-center">
-            <h1>{{> icon.object iconId="communication-ic_location_on_48px" iconTitle="Marker" iconRole="presentation" }} Icon in heading</h1>
-        </div>
-    </div>
-    <div class="row mt-5">
-        <div class="col text-center">
-            <div class="alert alert-success" role="alert">{{> icon.object iconId="communication-ic_rss_feed_48px" iconTitle="RSS Feed" iconRole="img" }} Alert text!</div>
-        </div>
-    </div>
-</div>
+    {{/each}}
+ </div>
