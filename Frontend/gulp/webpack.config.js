@@ -28,6 +28,7 @@ module.exports = {
         new UglifyJSPlugin({
             sourceMap: (process.env.NODE_ENV === 'production') ? false : true,
             minimize: true,
+            mangle: false,
             parallel: {
                 cache: true,
                 workers: 2
