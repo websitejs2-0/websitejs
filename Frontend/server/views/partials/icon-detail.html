@@ -5,20 +5,22 @@
         </div>
     </div>
     <div class="row mt-5">
-        <div class="col-2 align-middle">
+        <div class="col-12 col-md-6 col-lg-4 text-center text-sm-left align-middle">
             {{> icon.object className="icon--big-5" iconFile=icon.folderName iconId=icon.id iconTitle=icon.id iconRole="img" }}
-        </div>
-        <div class="col-2 align-middle">
             {{> icon.object className="icon--big-4" iconFile=icon.folderName iconId=icon.id iconTitle=icon.id iconRole="img" }}
-        </div>
-        <div class="col-2 align-middle">
             {{> icon.object className="icon--big-3" iconFile=icon.folderName iconId=icon.id iconTitle=icon.id iconRole="img" }}
-        </div>
-        <div class="col-2 align-middle">
             {{> icon.object className="icon--big-2" iconFile=icon.folderName iconId=icon.id iconTitle=icon.id iconRole="img" }}
-        </div>
-        <div class="col-2 align-middle">
             {{> icon.object iconFile=icon.folderName iconId=icon.id iconTitle=icon.id iconRole="img" }}
+        </div>
+        <div class="col-12 col-md-6 col-lg-8 text-center text-sm-left mt-3 mt-md-0">
+            <div class="row">
+                <div class="col-12 col-md-3"><p>Icon url:</p></div>
+                <div class="col-12 col-md-9"><p><a href="#">{{ icon.folderName }}.svg#{{ icon.id }}</a></p></div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-3"><p>Icon source path:</p></div>
+                <div class="col-12 col-md-9"><p>/src/assets/icons/svg/{{ icon.folderName }}/{{ replace icon.id "-" "/" }}.svg</p></div>
+            </div>
         </div>
     </div>
 </div>
