@@ -8,6 +8,7 @@
         "$": true,
         "jQuery": true,
         "viewport": true,
-        "svg4everybody": true
+        "svg4everybody": true,
+        "ComponentHandler": true
     }
 }

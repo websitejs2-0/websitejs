@@ -17,6 +17,8 @@ svg4everybody();
 // main logic
 $(function() { 
 
+    // upgrades and inits components registered to the Component Handler
+    ComponentHandler.upgradeAllRegistered();
     
     console.log('Loaded.');
 
