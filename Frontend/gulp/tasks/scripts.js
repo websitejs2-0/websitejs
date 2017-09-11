@@ -28,7 +28,13 @@ function cleanScripts(done) {
  */
 function compileScripts(done) {
 
-    gulp.src([path.join(config.folders.src.root, '*.js'), path.join('!' + config.folders.src.root, 'server.js')])
+    gulp.src([
+        path.join(config.folders.src.root, '*.js'), 
+        path.join('!' + config.folders.src.root, 'server.js'), 
+        path.join(config.folders.src.js, '*.js'),
+        path.join(config.folders.src.objects, '**/*.js'),
+        path.join(config.folders.src.components, '**/*.js')
+    ])
         .pipe(named(function() { return 'bundle.min'; }))
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
@@ -52,7 +58,7 @@ function watchScripts() {
     gulp.watch([
         path.join(config.folders.src.root, '*.js'),
         path.join('!' + config.folders.src.root, 'server.js'),
-        path.join(config.folders.src.js, 'libs', '**/*.js'),
+        path.join(config.folders.src.js, '**/*.js'),
         path.join(config.folders.src.objects, '**/*.js'),
         path.join(config.folders.src.components, '**/*.js')
     ], { ignorePermissionErrors: true }, gulp.series('scripts'));
