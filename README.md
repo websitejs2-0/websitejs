@@ -19,7 +19,7 @@ $ npm install
 ## Architecture
 
 #### Scripts
-
+[ComponentHandler](./Frontend/readme/componenthandler.md)
 
 #### Styles
 WebsiteJs uses the Atomic Design principle (not to be confused with the methodology). The sass architecture is based on ITCSS and uses the BEM methodology.
