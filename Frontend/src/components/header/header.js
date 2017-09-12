@@ -1,6 +1,6 @@
 'use strict';
 
-var Header = function() {
+var Header = function($element) {
 
     this.init = function() {
         console.log('Header init!');
