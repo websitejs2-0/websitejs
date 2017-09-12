@@ -12,8 +12,8 @@ var AjaxCall = function() {
      * @param {object} options.data Data to send to request url.
      * @param {string} [options.dataType='json'] Data type.
      * @param {string} [options.contentType='application/json; charset=utf-8'] Content type.
-     * @param {functon} [cb] Callback function.
-     * @param {functon} [fcb] Failed Callback function.
+     * @param {function} [cb] Callback function.
+     * @param {function} [fcb] Failed Callback function.
      */
     this.request = function(options, cb, fcb) {
 
