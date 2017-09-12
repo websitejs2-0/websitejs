@@ -112,7 +112,6 @@ var QueryStringHandler = function() {
      * Fetches current querystring of window.location.
      * @param {boolean} [stripQuestionMark] If true strips '?' from beginning of querystring.
      * @returns {string} Querystring.
-     * @public
      */
     this.getQueryString = function(stripQuestionMark) {
         if (typeof stripQuestionMark !== 'undefined' && stripQuestionMark === true) {
@@ -125,7 +124,6 @@ var QueryStringHandler = function() {
      * Fetches current hash of window.location.
      * @param {boolean} [stripHashtag] If true strips '#' from beginning of hash.
      * @returns {string} Hash.
-     * @public
      */
     this.getHash = function(stripHashtag) {
         if (typeof stripHashtag !== 'undefined' && stripHashtag === true) {
