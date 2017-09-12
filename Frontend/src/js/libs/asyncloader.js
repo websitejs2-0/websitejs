@@ -17,6 +17,7 @@
 var AsyncLoader = function() {
 
     this.createdElements = [];
+    this.timeout = 200;
 
     /**
      * Load external files asychronously, based on file extension (js/css).
@@ -139,12 +140,15 @@ var AsyncLoader = function() {
         if (!element) {
             element = document.createElement(elementType);
             element[fileTypeAttr] = fileType;
+            if (elementType === 'script') {
+                element.async = true;
+            }
             document.body.appendChild(element);
 
             if (typeof callback === 'function') {
                 element.addEventListener('load', function() {
                     _this.createdElements.push(fileUrl);
-                    callback();
+                    setTimeout(callback, _this.timeout);
                 });
             }
 
@@ -157,7 +161,7 @@ var AsyncLoader = function() {
                 if (typeof callback === 'function') {
                     element[0].addEventListener('load', function() {
                         _this.createdElements.push(fileUrl);
-                        callback();
+                        setTimeout(callback, _this.timeout);
                     });
                 }
             } else {
