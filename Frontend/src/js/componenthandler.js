@@ -1,6 +1,6 @@
 'use strict';
 
-(function($) {
+(function() {
     /**
      * Keeps track of registered elements and components.
      * Upgrades and instantiates components when registered css classnames are found in the DOM.
@@ -221,4 +221,4 @@
     };
 
     window.ComponentHandler = new ComponentHandler();
-})(jQuery);
+})();
