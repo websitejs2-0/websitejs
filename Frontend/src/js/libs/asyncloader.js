@@ -17,34 +17,41 @@
 var AsyncLoader = function() {
 
     this.createdElements = [];
-    this.timeout = 200;
+    this.timeout = 0;
 
     /**
      * Load external files asychronously, based on file extension (js/css).
      * @param {string|array} urls Url or urls to load.
+     * @param {number} [timeout] Optional timeout before callback is triggered.
      * @param {function} [callback] Optional callback function.
      */
-    this.load = function(urls, cb) {
+    this.load = function(urls, timeout, cb) {
         var _this = this,
             test = null,
             arrJS = [],
             arrCSS = [];
 
-        if (typeof urls === 'string') {
+        // if timeout is not set
+        if (typeof timeout === 'undefined') {
+            this.timeout = 0;
+        } else if (typeof timeout === 'function') {
+            this.timeout = 0;
+            cb = timeout;
+        } else {
+            this.timeout = timeout;
+        }
 
+        if (typeof urls === 'string') {
             test = urls.substr(urls.lastIndexOf('.')+1);
             if (test === 'css') {
                 this.loadStylesheet(urls, cb);
             } else {
                 this.loadScript(urls, cb);
             }
-
         } else if (Array.isArray(urls)) {
 
             for(var i = 0; i < urls.length; i++) {
-
                 test = urls[i].substr(urls[i].lastIndexOf('.')+1);
-                
                 if (test === 'css') {
                     arrCSS.push(urls[i]);
                 } else {
