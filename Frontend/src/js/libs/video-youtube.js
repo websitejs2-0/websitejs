@@ -11,6 +11,12 @@ var asyncloader = require('./asyncloader');
  */
 var VideoYouTube = function() {
 
+    var apiLoaded = false;
+
+    window.onYouTubeIframeAPIReady = function() {
+        apiLoaded = true;
+    }
+
     /**
      * Loads Youtube API async.
      * @param {function} cb Callback function.
@@ -18,7 +24,12 @@ var VideoYouTube = function() {
     this.loadApi = function(cb) {
         // load video api and populate player object
         asyncloader.load('https://www.youtube.com/iframe_api', function() {
-            cb(YT);
+            var intervalId = setInterval(function() {
+                if (apiLoaded) {
+                    clearInterval(intervalId);
+                    cb(YT);
+                }
+            }, 100);
         });
     };
 

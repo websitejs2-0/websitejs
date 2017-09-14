@@ -11,13 +11,16 @@ var asyncloader = require('./asyncloader');
  */
 var VideoVimeo = function() {
 
+    var apiLoaded = false;
+
     /**
      * Loads Vimeo API async.
      * @param {function} cb Callback function.
      */
     this.loadApi = function(cb) {
         // load video api and populate player object
-        asyncloader.load('https://player.vimeo.com/api/player.js', function() {
+        asyncloader.load('https://player.vimeo.com/api/player.js', 100, function() {
+            apiLoaded = true;    
             cb(Vimeo);
         });
     };
