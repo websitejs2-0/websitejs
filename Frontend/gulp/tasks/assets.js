@@ -11,7 +11,12 @@ var path = require('path'),
  * @param {function} done Callback.
  */
 function cleanAssets(done) {
-    del([path.join(config.folders.build.assets.images, '**/*.{jpg,png,gif}'), '!' + config.folders.build.assets.images]).then(function(paths) {
+    del([
+        path.join(config.folders.build.assets.icons.root, '**/*.ico'), 
+        path.join(config.folders.build.assets.images, '**/*.{jpg,png,gif}'), 
+        '!' + config.folders.build.assets.images
+    
+    ]).then(function(paths) {
         if (process.env.DEBUG === 'true' && paths.length > 0) {
             gutil.log('Cleaned:\n', paths.join('\n'));
         }
@@ -24,6 +29,10 @@ function cleanAssets(done) {
  * @param {function} done Callback.
  */
 function compileAssets(done) {
+    
+    gulp.src(path.join(config.folders.src.assets.icons.root, '**/*.ico'))
+        .pipe(gulp.dest(config.folders.build.assets.icons.root));
+    
     gulp.src(path.join(config.folders.src.assets.images, '**/*.{jpg,png,gif}'))
         .pipe(imagemin([], {
             verbose: (process.env.DEBUG === 'true')
