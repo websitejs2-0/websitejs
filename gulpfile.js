@@ -20,7 +20,6 @@ process.argv.forEach(function(val) {
 });
 
 // clear console and display current environment
-console.clear();
 console.log(chalk.yellow('\nBuild: %s %s\n'), process.env.NODE_ENV, (process.env.DEBUG === 'true') ? 'in debug mode.' : '');
 
 // register tasks
