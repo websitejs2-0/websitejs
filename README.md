@@ -25,6 +25,11 @@ $ npm install
 WebsiteJs uses the Atomic Design principle (not to be confused with the methodology). The sass architecture is based on ITCSS and uses the BEM methodology.
 This way it is modular, scalable, flexible and maintainable. Based on the article [better css with atomic, itcss and bem](https://www.silverstripe.org/blog/better-css-putting-it-together-with-atomic-itcss-and-bem/). Must read!
 
+## Working with components
+[Compile Components](./Frontend/readme/compilecomponents.md)
+
+[Local Development Server](./Frontend/readme/developmentserver.md)
+
 ## Supported browsers
 WebsiteJS uses [Browserslist](https://github.com/ai/browserslist) which can be configured in the `.browserslistrc` file in the root of the project.
 
@@ -105,18 +110,6 @@ or
 $ npm run build-production
 ```
  > You can use both --debug and --production flags independend from each other or at the same time. E.g: ``` $ gulp --debug --production```
-
-## Localhost Development Server
-The development server is an NodeJS Express server based on BrowserSync and is kept alive by Nodemon.
-It uses Handlebars to render templates and updates on the fly. No preprocessing neccessary.
-The server watches all project files and will auto-reload when changes are detected.
-To start the server use
-```sh
-$ gulp serve [--production, --debug]
-``` 
-The server auto-detects a free port (from port number 3000 and up) and is run by default in development (NODE_ENV) mode.
-
-To start the server only use ```$ gulp server``` or ```$ npm start```
 
 
 <!-- ## Jasmine testing
