@@ -17,7 +17,7 @@ var path = require('path'),
  * Cleans compiled css file.
  * @param {function} done Callback.
  */
-function cleanStyles(done, files) {
+function cleanStyles(done) {
     del([path.join(config.folders.build.css, '*.{min.css,min.css.map,css}'), path.join('!' + config.folders.build.css, 'server.{min.css,min.css.map,css}'), '!' + config.folders.build.css]).then(function(paths) {
         if (process.env.DEBUG === 'true' && paths.length > 0) {
             gutil.log('Cleaned:\n', paths.join('\n'));
