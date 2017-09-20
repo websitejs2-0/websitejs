@@ -1,5 +1,5 @@
 ## Compiling components
-When using the [local development server](./Frontend/readme/developmentserver.md) components get rendered on the fly. They will not be compiled to static html.
+When using the [local development server](./developmentserver.md) components get rendered on the fly. They will not be compiled to static html.
 Compiling to html is done by using the ```gulp compile``` task and must be ran by hand.
 
  > WebsiteJS uses the Handlebars template engine.
@@ -17,6 +17,6 @@ The compile task will render and compile the template to plain html and places t
 #### Compile all components
 To compile all components, run
 ```gulp compile --c``` or ```gulp compile --component```
- 
+
 Just leave out a component name.
  
