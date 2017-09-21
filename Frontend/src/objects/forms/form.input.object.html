@@ -1,0 +1,16 @@
+<div class="form-group">
+    {{#if label}}<label{{#if id}} for="{{id}}"{{/if}}>{{label}}{{#compare required '===' true}}<span class="mandatory">*</span>{{/compare}}</label>{{/if}}
+    <input type="{{#if type}}{{type}}{{else}}text{{/if}}" class="form-control{{#if class}} {{class}}{{/if}}" name="{{name}}" 
+        {{#if id}} id="{{id}}"{{/if}}
+        {{#if value}} value="{{value}}"{{/if}} 
+        {{#compare required '===' true}} required{{/compare}}
+        {{#if description}} aria-describedby="{{#if id}}{{id}}{{else}}{{name}}{{/if}}Description"{{/if}} 
+        {{#if placeholder}} placeholder="{{placeholder}}"{{/if}}
+        {{#each attrs as |value attr|}}
+            {{attr}}="{{value}}"
+        {{/each}}
+        {{#compare readonly '===' true}} readonly{{/compare}}
+        {{#compare disabled '===' true}} disabled{{/compare}}
+    >
+    {{#if description}}<small id="{{#if id}}{{id}}{{else}}{{name}}{{/if}}Description" class="form-text text-muted">{{description}}</small>{{/if}}
+</div>

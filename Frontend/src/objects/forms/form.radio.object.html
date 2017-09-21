@@ -1,0 +1,20 @@
+<div class="form-check">
+    <label class="form-check-label">
+        <input 
+            class="form-check-input{{#if class}} {{class}}{{/if}}" 
+            type="radio"
+            name="{{name}}" 
+            {{#if id}} id="{{id}}"{{/if}}
+            {{#if value}} value="{{value}}"{{/if}}
+            {{#compare checked '===' true}} checked{{/compare}}
+            {{#compare required '===' true}} required{{/compare}}
+            {{#each attrs as |value attr|}}
+                {{attr}}="{{value}}"
+            {{/each}}
+            {{#compare disabled '===' true}} disabled{{/compare}}
+            {{#if description}} aria-describedby="{{#if id}}{{id}}{{else}}{{name}}{{/if}}Description"{{/if}}
+        >
+        {{label}}{{#compare required '===' true}}<span class="mandatory">*</span>{{/compare}}
+        {{#if description}}<small id="{{#if id}}{{id}}{{else}}{{name}}{{/if}}Description" class="form-text text-muted">{{description}}</small>{{/if}}
+    </label>
+</div>

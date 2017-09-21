@@ -1,0 +1,204 @@
+<div class="container">
+    <div class="row mt-5 mb-5">
+        <div class="col-12">
+
+            <form>
+
+                {{> form.input.object 
+                    label="Username"
+                    name="username"
+                    class="form-control-lg input__username"
+                    required=true
+                    attrs=(object 
+                        data-username="username" 
+                        data-password="password"
+                    )
+                }}
+                
+                {{> form.input.object 
+                    label="Emailaddress" 
+                    type="email" 
+                    name="emailaddress"
+                    class="form-control-sm"
+                    id="Email"
+                    required=true
+                    placeholder="name@domain.tld" 
+                    description="We'll never share your email with anyone else."
+                }}
+                
+                {{> form.input.object 
+                    label="Password" 
+                    type="password" 
+                    name="password"
+                    disabled=true
+                    id="Password"
+                    required=true
+                    description="Keep your password private." 
+                }}
+                
+                {{> form.input.object 
+                    label="Search type" 
+                    type="search" 
+                    name="search"
+                    id="Search"
+                    placeholder="type your query" 
+                }}
+                
+                {{> form.input.object 
+                    label="Website" 
+                    type="url" 
+                    name="url"
+                    placeholder="http(s)://..." 
+                }}
+                
+                {{> form.input.object 
+                    label="Telephone" 
+                    type="telephone" 
+                    name="tel"
+                    value="+31 (0)6 123456789" 
+                    placeholder="+00 (0)0 000000"
+                }}
+                
+                {{> form.input.object 
+                    label="Number" 
+                    type="number" 
+                    name="number"
+                    placeholder="19" 
+                }}
+                
+                {{> form.input.object 
+                    label="Date/Time local" 
+                    type="datetime-local" 
+                    name="datetime-local"
+                }}
+                
+                {{> form.input.object 
+                    label="Date" 
+                    type="date" 
+                    name="date"
+                    value="2017-09-21"
+                }}
+
+                {{> form.input.object 
+                    label="Month" 
+                    type="month" 
+                    name="month"
+                }}
+
+                {{> form.input.object 
+                    label="Week" 
+                    type="week" 
+                    name="week"
+                }}
+
+                {{> form.input.object 
+                    label="Time" 
+                    type="time" 
+                    name="time"
+                }}
+
+                {{> form.input.object 
+                    label="Color" 
+                    type="color" 
+                    name="color"
+                    value="#00ffcc"
+                }}
+
+                {{> form.checkbox.object 
+                    label="This is a checkbox"
+                    name="checkbox"
+                    id="checkbox1"
+                    value="checkbox-one"
+                    required=true
+                    attrs=(object 
+                        data-username="username" 
+                        data-password="password"
+                    )
+                }}
+
+                {{> form.checkbox.object 
+                    label="This is a second checkbox"
+                    name="checkbox2"
+                    id="checkbox2"
+                    value="checkbox-two"
+                    required=true
+                    checked=true
+                    disabled=true
+                    attrs=(object 
+                        data-username="username" 
+                        data-password="password"
+                    )
+                    description="This checkbox is disabled."
+                }}
+
+                {{> form.radio.object 
+                    label="This is a radio"
+                    name="radios"
+                    id="radio1"
+                    value="radio-one"
+                    required=true
+                }}
+
+                {{> form.radio.object 
+                    label="This is a second radio"
+                    name="radios"
+                    id="radio2"
+                    value="radio-two"
+                    checked=true
+                    required=true
+                }}
+
+                {{> form.radio.object 
+                    label="This is a third radio"
+                    name="radios"
+                    id="radio3"
+                    value="radio-three"
+                    required=true
+                    description="Choose one radio."
+                }}
+
+                {{> form.select.object 
+                    label="Select element"
+                    name="select"
+                    id="seclectOne"
+                    required=true
+                    options=(object 
+                        option5="option5" 
+                        option4="option4" 
+                        option3="option3" 
+                        option2="option2" 
+                        option1="option1" 
+                        -="please select an option" 
+                    )
+                    description="Select your option."
+                }}
+
+                {{> form.select.object 
+                    label="Multi Select element"
+                    name="multiselect"
+                    id="seclectMultiple"
+                    multiple=true
+                    required=true
+                    options=(object 
+                        option5="option5" 
+                        option4="option4" 
+                        option3="option3" 
+                        option2="option2" 
+                        option1="option1" 
+                        -="please select an option" 
+                    )
+                    description="Select your options."
+                }}
+
+                {{> form.file.object 
+                    label="Select the picture you want to upload"
+                    name="picture"
+                    id="picture"
+                    required=true
+                    description="Only .jpg, .png, .gif files are allowed."
+                }}
+            </form>
+
+        </div>
+    </div>
+</div>
