@@ -59,6 +59,7 @@
     "node-fs-extra": "^0.8.2",
     "nodemon": "^1.11.0",
     "openport": "0.0.4",
+    "pretty": "^2.0.0",
     "progress-bar-webpack-plugin": "^1.10.0",
     "require-again": "^2.0.0",
     "require-dir": "^0.3.2",

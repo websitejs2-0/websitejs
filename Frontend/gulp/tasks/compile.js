@@ -7,7 +7,8 @@ var path = require('path'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     Handlebars = require('handlebars'),
-    hbshelpers = require('../../server/hbs-helpers/helpers.js');
+    hbshelpers = require('../../server/hbs-helpers/helpers.js'),
+    pretty = require('pretty');
 
 // register handlebars helpers
 Handlebars.registerHelper(hbshelpers);
@@ -23,6 +24,11 @@ for (var i = 0; i < partials.length; i++) {
     Handlebars.registerPartial(name, template);
 }
 
+// html beautify options
+var prettyOptions = {
+    ocd: true,
+    indent_size: 4
+};
 
 /**
  * Compiles views by compiling handlebars.
@@ -54,9 +60,10 @@ function compileView(done) {
                 if (typeof args[1] !== 'undefined') {
                     if (typeof Handlebars.partials[args[1]] !== 'undefined') {
                         var file = path.join(config.folders.build.components, args[1], args[1] + '.html'),
-                            tpl = Handlebars.compile(Handlebars.partials[args[1]]);
+                            tpl = Handlebars.compile(Handlebars.partials[args[1]]),
+                            html = pretty(tpl(), prettyOptions);
 
-                        fs.outputFile(file, tpl(), function(err) {
+                        fs.outputFile(file, html, function(err) {
                             if (err) {
                                 console.log(err);
                             }
@@ -70,8 +77,10 @@ function compileView(done) {
                         if (!pat.exec(component)) {
                             /* jshint ignore:start */
                             var file = path.join(config.folders.build.components, component, component + '.html'),
-                                tpl = Handlebars.compile(Handlebars.partials[component]);
-                            fs.outputFile(file, tpl(), function(err) {
+                                tpl = Handlebars.compile(Handlebars.partials[component]),
+                                html = pretty(tpl(), prettyOptions);
+
+                            fs.outputFile(file, html, function(err) {
                                 if (err) {
                                     console.log(err);
                                 }
