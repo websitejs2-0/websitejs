@@ -2,7 +2,7 @@
     <div class="row mt-5 mb-5">
         <div class="col-12">
 
-            <form>
+            <form class="js-form-validator">
 
                 {{> form.input.object 
                     label="Username"
@@ -30,7 +30,6 @@
                     label="Password" 
                     type="password" 
                     name="password"
-                    disabled=true
                     id="Password"
                     required=true
                     description="Keep your password private." 
@@ -197,6 +196,9 @@
                     required=true
                     description="Only .jpg, .png, .gif files are allowed."
                 }}
+
+                {{>button.object type="submit" classname="btn-primary" label="Submit form"}}
+                {{>button.object type="reset" classname="btn-secondary" label="Reset"}}
             </form>
 
         </div>

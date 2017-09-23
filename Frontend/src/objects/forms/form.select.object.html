@@ -1,5 +1,5 @@
 <div class="form-group">
-    {{#if label}}<label{{#if id}} for="{{id}}"{{/if}}>{{label}}{{#compare required '===' true}}<span class="mandatory">*</span>{{/compare}}</label>{{/if}}
+    {{#if label}}<label class="form-control-label"{{#if id}} for="{{id}}"{{/if}}>{{label}}{{#compare required '===' true}}<span class="mandatory">*</span>{{/compare}}</label>{{/if}}
     <select 
         class="form-control{{#if class}} {{class}}{{/if}}"
         name="{{name}}" 

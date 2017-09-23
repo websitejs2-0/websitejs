@@ -3,3 +3,16 @@
     padding: 0;
     color: theme-color(danger);
 }
+
+.has-danger {
+    .form-control-label,
+    .form-check-label,
+    .form-control-file {
+        transition: 200ms color ease-in-out;
+        color: theme-color(danger);
+    }
+    .form-control {
+        transition: 200ms border-color ease-in-out;
+        border-color: theme-color(danger);
+    }
+}
