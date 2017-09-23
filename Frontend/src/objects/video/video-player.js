@@ -1,4 +1,3 @@
-/* globals YT */
 'use strict';
 
 var video = {
