@@ -1,1 +1,7 @@
-<a href="{{href}}" class="btn {{#if classname}}{{classname}}{{/if}}" {{#if target}}target="{{target}}"{{/if}}>{{label}}</a>
+<button
+    {{#if type}} type="{{type}}"{{/if}} 
+    class="btn {{#if classname}}{{classname}}{{/if}}{{#compare disabled '===' true}} disabled{{/compare}}"
+    {{#compare disabled '===' true}} disabled{{/compare}}
+>
+{{label}}
+</button>

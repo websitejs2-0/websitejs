@@ -1,3 +1,7 @@
-.btn {
-    transform: scale(1);
+button {
+    &.btn {
+        &:not(:disabled) {
+            cursor: pointer;
+        }
+    }
 }
