@@ -71,7 +71,6 @@ var helpers = {
     },
 
     object: function(obj) {
-        console.log(obj.hash);
         return obj.hash;
     }
 
