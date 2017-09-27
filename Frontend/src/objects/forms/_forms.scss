@@ -1,18 +1,32 @@
-.mandatory {
-    margin: 0 0 0 5px;
-    padding: 0;
-    color: theme-color(danger);
-}
-
-.has-danger {
+form {
+    .form-control,
     .form-control-label,
     .form-check-label,
     .form-control-file {
-        transition: 200ms color ease-in-out;
+        transition: 200ms border-color ease-in-out, 220ms color ease-in-out;
+    }
+    .has-danger {
+        .form-control-file {
+            color: theme-color(danger);
+        }
+        .form-control {
+            border-color: theme-color(danger);
+        }
+    }
+    .has-feedback {
         color: theme-color(danger);
     }
-    .form-control {
-        transition: 200ms border-color ease-in-out;
-        border-color: theme-color(danger);
+    .has-success {
+        .form-control-file {
+            color: theme-color(success);
+        }
+        .form-control {
+            border-color: theme-color(success);
+        }
+    }
+    .mandatory {
+        margin: 0 0 0 5px;
+        padding: 0;
+        color: theme-color(danger);
     }
 }

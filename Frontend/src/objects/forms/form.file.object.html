@@ -12,5 +12,6 @@
         {{#compare disabled '===' true}} disabled{{/compare}}
         {{#if description}} aria-describedby="{{#if id}}{{id}}{{else}}{{name}}{{/if}}Description"{{/if}}
     >
+    <small class="form-text has-feedback d-none">This is a generic error</small>
     {{#if description}}<small id="{{#if id}}{{id}}{{else}}{{name}}{{/if}}Description" class="form-text text-muted">{{description}}</small>{{/if}}
 </div>  

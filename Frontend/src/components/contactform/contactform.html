@@ -1,0 +1,100 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col text-center">
+            <h2>Contact form</h2>
+            <p>Please fill out your details.</p>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+
+            <form class="contactform js-contactform js-form-validator">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            {{> form.radiolist.object name="salutation" label="Choose your salutation" required=true options=(object mr="Mr." mrs="Mrs.") }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        {{> form.input.object label="Name" name="name" required=true }}
+                    </div>
+                    <div class="col-12 col-md-6">
+                        {{> form.input.object label="Lastname" name="lastname" required=true description="Please include prepositions. ie: van der Laan." }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        {{> form.input.object type="email" label="Email Address" name="emailaddress" required=true description="Your email will be kept confidential." }}
+                    </div>
+                    <div class="col-12 col-md-6">
+                        {{> form.input.object type="tel" label="Phone" name="phone" placeholder="+316123456789" attrs=(object data-val-telephone="" data-val-telephone-msg="This is not a valid telephone number.") }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        {{> form.input.object type="password" label="Password" name="password" id="password" required=true }}
+                    </div>
+                    <div class="col-12 col-md-6">
+                        {{> form.input.object type="password" label="Confirm Password" name="password-confirm" required=true attrs=(object data-val-equal="#password" data-val-equal-msg="This value should be the same as your password.") }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <a data-toggle="collapse" href="#postalAddress" aria-expanded="false" aria-controls="postalAddress">Add Address</a>
+                    </div>
+                </div>
+
+                <div class="collapse" id="postalAddress">
+                    <div class="row mt-3">
+                        <div class="col-12 col-md-6">
+                            {{> form.input.object type="text" label="Zipcode" name="zipcode" required=true attrs=(object data-val-zipcode="nl" data-val-zipcode-msg="This zipcode is not valid. Use 1234AA format.") }}
+                        </div>
+                        <div class="col-12 col-md-6">
+                            {{> form.input.object type="text" label="Streetname" name="street" required=true }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <a data-toggle="collapse" href="#otherData" aria-expanded="false" aria-controls="otherData">Add more data</a>
+                    </div>
+                </div>
+
+                <div class="collapse" id="otherData">
+                    <div class="row mt-3">
+                        <div class="col-12 col-md-6">
+                            {{> form.input.object type="number" min="1" max="3" label="Age" name="age" }}
+                        </div>
+                        <div class="col-12 col-md-6">
+                            {{> form.input.object type="url" label="Website" name="website" required=true placeholder="http(s)://domain.tld" }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <div class="form-group">
+                            {{> form.checkboxlist.object name="interested" label="What are your interests?" required=true options=(object internet="Internet" television="TV" radio="Radio" books="Books" movies="Movies" sports="Sports" ) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col">
+                        {{>button.object type="submit" classname="btn-primary" label="Submit form"}}
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

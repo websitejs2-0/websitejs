@@ -3,6 +3,10 @@
     <input type="{{#if type}}{{type}}{{else}}text{{/if}}" class="form-control{{#if class}} {{class}}{{/if}}" name="{{name}}" 
         {{#if id}} id="{{id}}"{{/if}}
         {{#if value}} value="{{value}}"{{/if}} 
+        {{#if min}} min="{{min}}"{{/if}}
+        {{#if max}} max="{{max}}"{{/if}}
+        {{#if minlength}} minlength="{{minlength}}"{{/if}}
+        {{#if maxlength}} maxlength="{{maxlength}}"{{/if}}
         {{#compare required '===' true}} required{{/compare}}
         {{#if description}} aria-describedby="{{#if id}}{{id}}{{else}}{{name}}{{/if}}Description"{{/if}} 
         {{#if placeholder}} placeholder="{{placeholder}}"{{/if}}
@@ -12,5 +16,6 @@
         {{#compare readonly '===' true}} readonly{{/compare}}
         {{#compare disabled '===' true}} disabled{{/compare}}
     >
+    <small class="form-text has-feedback d-none">This is a generic error</small>
     {{#if description}}<small id="{{#if id}}{{id}}{{else}}{{name}}{{/if}}Description" class="form-text text-muted">{{description}}</small>{{/if}}
 </div>

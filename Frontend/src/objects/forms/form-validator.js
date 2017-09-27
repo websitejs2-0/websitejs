@@ -1,14 +1,25 @@
 'use strict';
 
+var utils = require('../../js/libs/utils'),
+    errorMessages = require('./form-validator-messages'),
+    customValidations = require('./form-validator-validations');
+
 /**
  * Form Validator class.
- * Validates forms.
+ * Validates forms by hooking into HTML5 validation.
+ * Add custom validations by adding data atributes.
+ * @author Rocco Janse <rocco.janse@valtech.nl>
+ * @version 0.5
+ * 
+ * TODO:    -custom validation for checkbox groups
+ * 
  * @param {jqueryelement} $element Form to validate.  
  */
 var FormValidator = function($element) {
     
     var _this = this;
 
+    this.attrStart = 'data-val-';
     this.$form = $element;
     this.$submitButton = [];
     this.isFormValid = false;
@@ -24,7 +35,6 @@ var FormValidator = function($element) {
         
         // set submitbutton
         this.$submitButton = this.$form.find('[type=submit]');
-        this.updateSubmitButton();
         
         // gather fields to validate
         // and update validation
@@ -33,11 +43,9 @@ var FormValidator = function($element) {
         // handle submit
         this.$submitButton.on('click', function(e) {
             e.preventDefault();
-            _this.validateFields();
-            _this.validate();
 
-            if (_this.isFormValid) {
-                
+            if (_this.validate()) {
+
                 // do submit
                 _this.$form.submit();
 
@@ -47,17 +55,13 @@ var FormValidator = function($element) {
             }
         });
 
+        // get collapsibles
+        var collapsibleClass = this.$form.data('collapsible-class') || 'collapse';
+        this.collapsibles = this.$form.find($('.' + collapsibleClass));
+        this.collapsibles.on('shown.bs.collapse hidden.bs.collapse', function() {
+            _this.update();
+        });
         return this;
-    };
-    
-    /**
-     * Validates all registered fields to validate.
-     */
-    this.validateFields = function() {
-        for (var i = 0; i < this.fieldsToValidate.length; i++) {
-            var field = this.fieldsToValidate[i];
-            _this.validateField(field);
-        }
     };
 
     /**
@@ -66,43 +70,88 @@ var FormValidator = function($element) {
      * @returns {boolean} True or false.
      */
     this.validateField = function(field) {
-        var ret = true;
-        console.log(field);
-        if (field.validity.valid) {
-            ret = true;
-        } else {
-            for (var validationType in field.validity) {
-                if (validationType !== 'valid' && field.validity[validationType] === true) {
-                    console.log(validationType);
-                    ret = false;
+        
+        var $feedback = $(field).closest('.form-group, .form-check').find('.has-feedback'),
+            validatorAttributes = utils.getElementAttributes($(field), this.attrStart),
+            msg = '';
+        
+        // first, do default HTML5 validation
+        field.setCustomValidity('');
+        field.checkValidity();
+
+        if ($(field).val()) {
+            // custom validations
+            for (var attrName in validatorAttributes) {
+                
+                var aName = attrName.replace(this.attrStart, ''),
+                    validation;
+    
+                // ignore messages
+                if (aName.indexOf('-msg') === -1) {
+                    validation = aName;
+                    
+                    // do custom validation, if exists
+                    // if false; break the loop and show error
+                    if (typeof customValidations[validation] !== 'undefined') {
+                        if (!customValidations[validation]($(field), validatorAttributes[attrName])) {
+                            // set custom validation
+                            msg = $(field).attr(attrName + '-msg') || errorMessages.badInput;
+                            field.setCustomValidity(msg);
+                            break;  
+                        } else {
+                            // clear custom validation
+                            field.setCustomValidity(''); 
+                        }
+                    }
                 }
             }
         }
 
-        if (!ret) {
-            $(field).closest('.form-group, .form-check').addClass('has-danger');
-        } else {
+        if (field.validity.valid) {
+            
+            // field is valid
             $(field).closest('.form-group, .form-check').removeClass('has-danger');
-        }
+            if ($feedback.length > 0) { $feedback.addClass('d-none'); }
+        
+        } else {
+            for (var validationType in field.validity) {
+                if (validationType !== 'valid' && field.validity[validationType] === true) {
+                    
+                    if (validationType !== 'customError') {
+                        // create message
+                        msg = errorMessages[validationType] || errorMessages.badInput;
+                    }
+                    
+                    // set feedback
+                    if ($feedback.length > 0) { 
+                        $feedback.text(msg);
+                        $feedback.removeClass('d-none');
+                    }
 
-        return ret;
+                    // set danger style
+                    $(field).closest('.form-group, .form-check').addClass('has-danger');
+                }
+            }
+        }
+        return field.validity.valid;
     };
 
     /**
-     * Validates form and updates submit button.
+     * Validates form.
      */
     this.validate = function() {
+
         var isValid = true;
+
+        // get element nodes from form node
         for (var i = 0; i < this.fieldsToValidate.length; i++) {
-            var field = this.fieldsToValidate[i];
-            if (!field.validity.valid) {
+            if (!this.validateField(this.fieldsToValidate[i])) {
                 isValid = false;
+                continue;
             }
-        } 
-        this.isFormValid = isValid; 
-        
-        // update submitbutton
-        this.updateSubmitButton();
+        }
+
+        return isValid;
     };
 
     /**
@@ -110,31 +159,45 @@ var FormValidator = function($element) {
      */
     this.update = function() {
         
-        this.fieldsToValidate = this.$form.find('[required]:enabled:visible:not(:hidden)');
-        
-        if (this.fieldsToValidate.length !== 0) {
+        var form = this.$form[0];
+        this.fieldsToValidate = [];
 
-            // add blur events to fields
-            this.fieldsToValidate.off('change.validator blur.validator').on('change.validator blur.validator', function() {
+        // get element nodes from form node
+        for (var i = 0; i < form.elements.length; i++) {
+            
+            var field = form.elements[i];
+
+            // ignore buttons, fieldsets, disabled, readonly and hidden etc.
+            if ((field.nodeName !== 'INPUT' && field.nodeName !== 'TEXTAREA' && field.nodeName !== 'SELECT') || (field.disabled === true || field.readOnly === true || $(field).is(':hidden') === true)) {
+                continue;
+            }
+            
+            // add events
+            $(field).off('change.validator keyup.validator blur.validator').on('change.validator keyup.validator blur.validator', function() {
                 _this.validateField(this);
-                _this.validate();
+                _this.updateSubmitButton();
             });
-            
-        } else {
 
-            // nothing to validate; form is valid
-            this.isFormValid = true;
-            
-            // update submitbutton
-            this.updateSubmitButton();
-        } 
+            this.fieldsToValidate.push(field);
+        }
+
+        this.updateSubmitButton();
     };
+
 
     /**
      * Updates disabled state of submit button.
      */
     this.updateSubmitButton = function() {
-        if (!this.isFormValid) {
+        var isValid = true;
+        for (var i = 0; i < this.fieldsToValidate.length; i++) {
+            if(!this.fieldsToValidate[i].validity.valid) {
+                isValid = false;
+                continue;
+            }
+        }
+
+        if (!isValid) {
             this.$submitButton.addClass('disabled').prop('disabled', true);
         } else {
             this.$submitButton.removeClass('disabled').prop('disabled', false);
