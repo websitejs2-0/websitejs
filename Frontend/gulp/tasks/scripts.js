@@ -54,7 +54,7 @@ function compileScripts(done) {
 /**
  * Watches scripts, objects and components folders for changes.
  */
-function watchScripts() {
+function watchScripts(done) {
     gulp.watch([
         path.join(config.folders.src.root, '*.js'),
         path.join('!' + config.folders.src.root, 'server.js'),
@@ -62,6 +62,7 @@ function watchScripts() {
         path.join(config.folders.src.objects, '**/*.js'),
         path.join(config.folders.src.components, '**/*.js')
     ], { ignorePermissionErrors: true }, gulp.series('scripts'));
+    done();
 }
 
 // define tasks and add task information

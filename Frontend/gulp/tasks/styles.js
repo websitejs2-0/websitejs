@@ -84,7 +84,7 @@ function compileStyles(done) {
 /**
  * Watches sass file, objects and components folders for changes.
  */
-function watchStyles() {
+function watchStyles(done) {
     gulp.watch([
         path.join(config.folders.src.root, '*.{scss,sass}'),
         path.join('!' + config.folders.src.root, 'server.{scss,sass}'),
@@ -92,6 +92,7 @@ function watchStyles() {
         path.join(config.folders.src.objects, '**/*.{scss,sass}'),
         path.join(config.folders.src.components, '**/*.{scss,sass}')
     ], { ignorePermissionErrors: true }, gulp.parallel('styles'));
+    done();
 }
 
 // define tasks and add task information

@@ -70,7 +70,7 @@ function compileSvgIcons(done) {
 /**
  * Watches svg icons folder for changes.
  */
-function watchSvgIcons() {
+function watchSvgIcons(done) {
     var watcher = gulp.watch(path.join(config.folders.src.assets.icons.svg), { ignorePermissionErrors: true }),
         inProgress = false;
 
@@ -88,6 +88,7 @@ function watchSvgIcons() {
             }, 2000);
         }
     });
+    done();
 }
 
 // define tasks and task information

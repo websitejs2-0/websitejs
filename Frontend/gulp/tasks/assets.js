@@ -44,7 +44,7 @@ function compileAssets(done) {
 /**
  * Watches assets images folder for changes.
  */
-function watchAssets() {
+function watchAssets(done) {
     var watcher = gulp.watch(path.join(config.folders.src.assets.images), { ignorePermissionErrors: true });
 
     watcher.on('all', function(e, filePath) {
@@ -75,6 +75,7 @@ function watchAssets() {
         }
 
     });
+    done();
 }
 
 // define tasks and add task information
