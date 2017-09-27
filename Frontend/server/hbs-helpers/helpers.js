@@ -71,7 +71,11 @@ var helpers = {
     },
 
     object: function(obj) {
-        return obj.hash;
+        var ret = {};
+        Object.keys(obj.hash).reverse().forEach(function(key, index) {
+            ret[key] = obj.hash[key];
+        });
+        return ret;
     }
 
 };
