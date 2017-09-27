@@ -30,6 +30,7 @@
     "cssnano": "^3.10.0",
     "del": "^3.0.0",
     "dev-ip": "^1.0.1",
+    "exports-loader": "^0.6.4",
     "express": "^4.15.3",
     "express-handlebars": "^3.0.0",
     "graceful-fs": "^4.1.11",
