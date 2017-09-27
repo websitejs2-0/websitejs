@@ -46,6 +46,10 @@ function compileScripts(done) {
                 gutil.log('%s: %s', chalk.red('Webpack issue'), chalk.white(err));
                 this.emit('end');
             }
+        })
+        .on('error', function(err) { 
+            gutil.log('%s: %s', chalk.red('Error: '), chalk.white(err.message));
+            this.emit('end');
         }))
         .pipe(gulp.dest(config.folders.build.js))
         .on('finish', function() { done(); });
