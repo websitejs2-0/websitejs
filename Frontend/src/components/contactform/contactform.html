@@ -46,6 +46,26 @@
                 </div>
 
                 <div class="row">
+                    <div class="col-12 col-md-6">
+                        {{> form.select.object label="Select an occupation" name="occupation" required=true options=(object 
+                            -="Please choose"
+                            government="Government" 
+                            informtation="Information technologies" 
+                            sports="Sports" 
+                            education="Education" 
+                        ) }}
+                    </div>
+                    <div class="col-12 col-md-6">
+                        {{> form.select.object label="How did you find us?" name="referer" multiple=true description="You can select multiple options." options=(object 
+                            internet="Internet" 
+                            television="Television" 
+                            radio="Radio" 
+                            recommended="Recommended by friend" 
+                        ) }}
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col">
                         <a data-toggle="collapse" href="#postalAddress" aria-expanded="false" aria-controls="postalAddress">Add Address</a>
                     </div>
