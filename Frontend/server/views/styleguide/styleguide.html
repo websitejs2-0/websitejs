@@ -1,83 +1,69 @@
 <div class="container-fluid">
-    <div class="container">
+    <div class="container mt-5 mb-5">
         <div class="row">
-            <div class="col-md-2"></div>
+            <div class="col-md-2 d-none d-md-block"></div>
             <div class="col-md-8">
 
-                <div class="page-header project-index">
-                    <h1>{{ project.name }}<br /><small>{{ project.description }}</small></h1>
-                    <p>{{ environment }} build version {{ project.version }}{{#compare debug "true"}} (debug mode){{/compare}} | jQuery version {{ project.jqversion }} | Bootstrap version {{ project.bsversion }}</p>
-                </div>
+                <h1>{{ project.name }}<br /><small>{{ project.description }}</small></h1>
+                <p>{{ environment }} build version {{ project.version }}{{#compare debug "true"}} (debug mode){{/compare}} | jQuery version {{ project.jqversion }} | Bootstrap version {{ project.bsversion }}</p>
 
-                <div class="page-header">
-                    <h3>Styleguide</h3>
-                </div>
+                <h3 class="mt-5">Styleguide</h3>
                 
                 {{#if pages}}
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th class="col-xs-6 col-md-3">Page</th>
-                                <th class="col-xs-6 col-md-9">Location</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{#each pages}}
-                            <tr>
-                                <td>{{ name }}</td>
-                                <td><a href="../{{ path }}">src/styleguide/{{ type }}</a></td>
-                            </tr>
-                            {{/each}}
-                        </tbody>
-                    </table>
+                <div class="row mt-5 pb-2 border border-top-0 border-left-0 border-right-0">
+                    <div class="col-4">
+                        <h6>Pages</h6>
+                    </div>
+                    <div class="col-8">
+                        <h6>Source</h6>
+                    </div>
                 </div>
+
+                {{#each pages}}
+                <div class="row pt-3 pb-3 border border-top-0 border-left-0 border-right-0">
+                    <div class="col-4"><a href="/styleguide/pages/{{name}}">{{name}}</a></div>
+                    <div class="col-8">{{ path }}</div>
+                </div>
+                {{/each}}
+
                 {{/if}}
 
                 {{#if components}}
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th class="col-xs-6 col-md-3">Component</th>
-                                <th class="col-xs-6 col-md-3">Type</th>
-                                <th class="col-xs-6 col-md-6">Location</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{#each components}}
-                            <tr>
-                                <td><a href="/styleguide/components/{{type}}/{{name}}">{{name}}</a></td>
-                                <td>{{type}}</td>
-                                <td>/src/components/{{relPath}}</td>
-                            </tr>
-                            {{/each}}
-                        </tbody>
-                    </table>
+                <div class="row mt-5 pb-2 border border-top-0 border-left-0 border-right-0">
+                    <div class="col-4">
+                        <h6>Components</h6>
+                    </div>
+                    <div class="col-8">
+                        <h6>Source</h6>
+                    </div>
                 </div>
+
+                {{#each components}}
+                <div class="row pt-3 pb-3 border border-top-0 border-left-0 border-right-0">
+                    <div class="col-4"><a href="/styleguide/components/{{type}}/{{name}}">{{name}}</a></div>
+                    <div class="col-8">/src/components/{{ relPath }}</div>
+                </div>
+                {{/each}}
+
                 {{/if}}
 
                 {{#if objects}}
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th class="col-xs-6 col-md-3">Object</th>
-                                <th class="col-xs-6 col-md-3">Type</th>
-                                <th class="col-xs-6 col-md-6">Location</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{#each objects}}
-                            <tr>
-                                <td><a href="/styleguide/objects/{{type}}/{{name}}">{{name}}</a></td>
-                                <td>{{type}}</td>
-                                <td>/src/objects/{{relPath}}</td>
-                            </tr>
-                            {{/each}}
-                        </tbody>
-                    </table>
+                <div class="row mt-5 pb-2 border border-top-0 border-left-0 border-right-0">
+                    <div class="col-4">
+                        <h6>Objects</h6>
+                    </div>
+                    <div class="col-8">
+                        <h6>Source</h6>
+                    </div>
                 </div>
+                
+                {{#each objects}}
+                <div class="row pt-3 pb-3 border border-top-0 border-left-0 border-right-0">
+                    <div class="col-4"><a href="/styleguide/objects/{{type}}/{{name}}">{{name}}</a></div>
+                    <div class="col-8">/src/objects/{{relPath}}</div>
+                </div>
+                {{/each}}
+
                 {{/if}}
 
             </div>
