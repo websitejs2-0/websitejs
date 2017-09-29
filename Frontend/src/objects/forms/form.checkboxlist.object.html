@@ -1,5 +1,8 @@
 <div class="form-group">
-    {{#if label}}<label class="form-control-label">{{label}}{{#compare required '===' true}}<span class="mandatory">*</span>{{/compare}}</label>{{/if}}
+    {{#if label}}<label class="form-control-label">{{label}}
+        {{#if required}}{{#compare required '===' true}}<span class="mandatory">*</span>{{/compare}}{{/if}}
+        {{#if requiredgroup}}{{#compare requiredgroup '===' true}}<span class="mandatory">*</span>{{/compare}}{{/if}}
+    </label>{{/if}}
     {{#each options as |label value|}}
     <div class="form-check">
         <label class="form-check-label">
@@ -11,6 +14,7 @@
                 {{#if value}} value="{{value}}"{{/if}}
                 {{#compare ../selected '===' value}} checked{{/compare}}
                 {{#compare ../required '===' true}} required{{/compare}}
+                {{#compare ../requiredgroup '===' true}} requiredgroup{{/compare}}
                 {{#compare ../disabled '===' value}} disabled{{/compare}}
             >
             {{label}}
