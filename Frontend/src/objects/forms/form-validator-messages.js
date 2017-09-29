@@ -16,7 +16,8 @@ var FormValidatorMessages = {
     stepMismatch: 'This value is not evenly divisible by the step value.',
     tooLong: 'This value is too long.',
     tooShort: 'This value is too short.',
-    typeMismatch: 'This value is not correct.'
+    typeMismatch: 'This value is not correct.',
+    requireGroup: 'Please select at least one option.'
     
 };
 

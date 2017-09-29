@@ -11,8 +11,6 @@ var utils = require('../../js/libs/utils'),
  * @author Rocco Janse <rocco.janse@valtech.nl>
  * @version 0.5
  * 
- * TODO:    -custom validation for checkbox groups
- * 
  * @param {jqueryelement} $element Form to validate.  
  */
 var FormValidator = function($element) {
@@ -71,15 +69,40 @@ var FormValidator = function($element) {
      */
     this.validateField = function(field) {
         
-        var $feedback = $(field).closest('.form-group, .form-check').find('.has-feedback'),
+        var $feedback = $(field).parents('.form-group, .form-check').find('.has-feedback'),
             validatorAttributes = utils.getElementAttributes($(field), this.attrStart),
-            msg = '';
+            msg = '',
+            i;
         
         // first, do default HTML5 validation
         field.setCustomValidity('');
         field.checkValidity();
 
-        if ($(field).val()) {
+        if (typeof $(field).attr('requiredgroup') !== 'undefined') {
+            
+            // requiredgroup validation (needs to have a minimum of one item selected)
+            var $groupFields = $(field).parents('.form-group').find('input'),
+                isGroupValid = false;
+            for (i = 0; i < $groupFields.length; i++) {
+                if ($($groupFields[i]).is(':checked')) {
+                    isGroupValid = true;
+                    break;
+                }
+            }
+
+            if (isGroupValid) {
+                for (i = 0; i < $groupFields.length; i++) {
+                    $groupFields[i].setCustomValidity('');
+                }
+            } else {
+                msg = errorMessages.requireGroup || errorMessages.badInput;
+                for (i = 0; i < $groupFields.length; i++) {
+                    $groupFields[i].setCustomValidity(msg);
+                }
+            }
+
+        } else if ($(field).val()) {
+            
             // custom validations
             for (var attrName in validatorAttributes) {
                 
@@ -173,17 +196,23 @@ var FormValidator = function($element) {
             }
             
             // add events
-            $(field).off('change.validator keyup.validator blur.validator').on('change.validator keyup.validator blur.validator', function() {
-                _this.validateField(this);
-                _this.updateSubmitButton();
-            });
-
+            $(field).off('change.validator keyup.validator blur.validator').on('change.validator keyup.validator blur.validator', this.updateField.bind(this));
+            
+            // add field to validation array
             this.fieldsToValidate.push(field);
         }
 
         this.updateSubmitButton();
     };
 
+    /**
+     * Field event update handler
+     */
+    this.updateField = function(e) {
+        var field = e.target;
+        this.validateField(field);
+        this.updateSubmitButton();
+    };
 
     /**
      * Updates disabled state of submit button.
