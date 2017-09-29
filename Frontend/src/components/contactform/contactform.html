@@ -101,9 +101,7 @@
 
                 <div class="row mt-3">
                     <div class="col-12">
-                        <div class="form-group">
-                            {{> form.checkboxlist.object name="interested" label="What are your interests?" required=true options=(object internet="Internet" television="TV" radio="Radio" books="Books" movies="Movies" sports="Sports" ) }}
-                        </div>
+                        {{> form.checkboxlist.object name="interested" label="What are your interests?" requiredgroup=true options=(object internet="Internet" television="TV" radio="Radio" books="Books" movies="Movies" sports="Sports" ) }}
                     </div>
                 </div>
 
