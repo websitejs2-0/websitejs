@@ -5,16 +5,17 @@ var Cookies = require('js-cookie');
 (function() {
 
     /**
-     * TODO
+     * Order control class.
+     * @author Peter Bust <peter.bust@valtech.nl>
      */
     var OrderCtrl = function() {
 
         /**
-         * TODO
+         * Cookie configurable items.
          */
         this.cookieConfig = {
-            name: 'order',
-            expires: 1
+            name: 'order', // name
+            expires: 1 // value in days
         };
 
         /**
@@ -25,9 +26,7 @@ var Cookies = require('js-cookie');
          * @public
          */
         this.calcSubtotal = function(amount, price) {
-
             return Number(Math.round((price * amount) + 'e2') + 'e-2');
-
         };
 
         /**
@@ -37,125 +36,107 @@ var Cookies = require('js-cookie');
          * @public
          */
         this.calcTotal = function(items) {
-
             if (!items) return null;
 
             var total = 0;
-
             for (var i = 0; i < items.length; i++) total += items[i].subtotal;
 
             return Number(Math.round(total + 'e2') + 'e-2');
-
         };
 
         /**
-         * TODO
+         * Creates an order object.
+         * @public
          */
         this.create = function() {
-
             this.order = {};
-
             this.update();
-
         };
 
         /**
-         * Adds a given item to the order object.
+         * Either updates the amount of already contained order item or (if not in order) pushes the item in the order object.
          * @param {object} item - Item to add.
          * @public
          */
         this.createItem = function(item) {
-
-            var _this = this;
+            var _this = this,
+                notInOrder = true;
 
             item.price = parseFloat(item.price);
             item.amount = parseInt(item.amount);
 
-            if (_this.order.items.length != 0) {
+            if (_this.order.items.length != 0)
                 for (var i = 0; i < _this.order.items.length; i++)
                     if (_this.order.items[i].id === item.id) {
                         _this.order.items[i].amount += item.amount;
-                        _this.updateCartElements();
-                        _this.update();
-                        return;
+                        notInOrder = false;
                     }
-            }
 
-            _this.order.items.push(item);
+            if (notInOrder) _this.order.items.push(item);
+
             _this.updateCartElements();
             _this.update();
         };
 
         /**
-         * TODO
+         * Deletes the cookie.
+         * @public
          */
         this.delete = function() {
-
             Cookies.remove(this.cookieConfig.name);
-
         };
 
         /**
-         * Remove an item from the order object with given id.
+         * Removes an item from the order object with given id.
          * @param {string} id - Item id to remove.
          * @public
          */
         this.deleteItem = function(id) {
-
             var _this = this;
 
             for (var i = 0; i < _this.order.items.length; i++)
-                if (_this.order.items[i].id === id) {
-                    _this.order.items.splice(i, 1);
-                }
+                if (_this.order.items[i].id === id) _this.order.items.splice(i, 1);
 
             _this.updateCartElements();
             _this.update();
         };
 
         /**
-         * TODO
+         * Return the stored (cookie) object, creates one if no cookie yet exists.
+         * @return {object} Order object.
+         * @public
          */
         this.read = function() {
-
             if (!Cookies.getJSON(this.cookieConfig.name)) this.create();
 
             return Cookies.getJSON(this.cookieConfig.name);
-
         };
 
         /**
-         * Save order in a cookie (or overwriting existing cookie).
+         * Saves order object in a cookie (or overwrites already existing cookie).
          * @public
          */
         this.save = function() {
-
             Cookies.set(this.cookieConfig.name, this.order, { expires: 1 });
-
         };
 
         /**
-         * Stringify a price to a (business logic) stringfied format.
+         * Stringify a price to a (business logic) format.
          * Add two trailing zeros: "9.9" to "9.90" and "9" to "9.00"
          * Replace dot with comma like: "9.99" to "9,99"
-         * @param {number} price - Price to reformat.
+         * @param {integer} price - Price to reformat.
          * @return {string} Stringified price.
          * @public
          */
         this.stringifyPrice = function(price) {
-
             return Number(Math.round(price + 'e2') + 'e-2').toFixed(2).replace('.', ',');
-
         };
 
         /**
-         * Update the order object calculated values and reformat required number values for view.
-         * Method updates all instances of ShoppingCart in view as well.
-         * @param {object} order - Order object to update.
+         * Updates the order object calculated values and reformat required integers for view.
          * @public
          */
         this.update = function() {
-
             var _this = this,
                 totalAmount = 0;
 
@@ -180,18 +161,16 @@ var Cookies = require('js-cookie');
             } else _this.order.isEmpty = true;
 
             _this.save();
-
         };
 
         /**
-         * Update item amount with given id.
+         * Updates an item amount.
          * @param {string} action - Action to handle, '++' to add 1, '--' to remove 1 or 'value' to update a new amount value.
          * @param {string} id - Item id to update.
          * @param {number} amount - New amount to update in case of action is 'value',
          * @public
          */
         this.updateItemAmount = function(action, id, amount) {
-
             var _this = this;
 
             for (var i = 0; i < _this.order.items.length; i++)
@@ -202,11 +181,11 @@ var Cookies = require('js-cookie');
                 }
 
             _this.update();
-
         };
 
         /**
-         * TODO
+         * Updates individual scopes off shopping cart order-amount-ctrl elements.
+         * @public
          */
         this.updateCartElements = function() {
             var $elements = $('.js-shopping-cart').find('.js-order-amount-ctrl');
@@ -217,7 +196,8 @@ var Cookies = require('js-cookie');
         };
 
         /**
-         * TODO
+         * The order object, bound to view in shopping-cart.js.
+         * @public
          */
         this.order = this.read();
 

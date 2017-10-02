@@ -6,13 +6,13 @@ var rivets = require('rivets');
 
 /**
  * Shopping cart class.
- * @param {jqueryelement} $element Current shopping cart node.
+ * @param {jqueryelement} $element Current shopping-cart node.
  * @author Peter Bust <peter.bust@valtech.nl>
  */
 var ShoppingCart = function($element) {
 
     /**
-     * Initializes shopping cart component.
+     * Initializes shopping-cart component.
      * @public
      */
     this.init = function() {

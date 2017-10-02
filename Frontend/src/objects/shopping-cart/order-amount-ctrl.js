@@ -3,122 +3,104 @@
 'use strict';
 
 /**
- * TODO
+ * Order amount controller class.
+ * @param {jqueryelement} $element Current js-order-amount-ctrl node.
+ * @author Peter Bust <peter.bust@valtech.nl>
  */
 var OrderAmountCtrl = function($element) {
 
     /**
-     * TODO
+     * Configurable options
      */
     this.config = {
-        maxAmount: 99,
+        maxAmount: 99
     };
 
     /**
-     * TODO
+     * Required class names.
      */
     this.classNames = {
-        inactive: 'inactive',
         btnAddToCart: 'amount-ctrl__add-to-cart',
         btnMin: 'amount-ctrl__min',
         btnPlus: 'amount-ctrl__plus',
         btnRemoveFromCart: 'amount-ctrl__remove-from-cart',
-        input: 'amount-ctrl__input',
+        inactive: 'inactive',
+        input: 'amount-ctrl__input'
     };
 
     /**
-     * TODO
+     * Required dom elements.
      */
     this.elements = {
+        $btnAddToCart: $element.find('.' + this.classNames.btnAddToCart),
         $btnMin: $element.find('.' + this.classNames.btnMin),
         $btnPlus: $element.find('.' + this.classNames.btnPlus),
-        $input: $element.find('.' + this.classNames.input),
-        $btnAddToCart: $element.find('.' + this.classNames.btnAddToCart),
         $btnRemoveFromCart: $element.find('.' + this.classNames.btnRemoveFromCart),
+        $input: $element.find('.' + this.classNames.input)
     };
 
     /**
-     * TODO
+     * Required data attributes.
      */
     this.dataAttrs = {
+        isControllingOrder: $element.attr('data-is-controlling-order'),
         itemId: $element.attr('data-item-id'),
-        itemTitle: $element.attr('data-item-title'),
         itemPrice: $element.attr('data-item-price'),
-        isControllingOrder: $element.attr('data-is-controlling-order')
-    }
+        itemTitle: $element.attr('data-item-title')
+    };
 
     /**
-     * TODO
+     * Initializes js-order-amount-ctrl component.
+     * @public
      */
-    this.createEvents = function() {
+    this.init = function() {
+        this.setEvents();
+        this.updateElements();
+    };
 
+    /**
+     * Set custom event handlers for user interaction.
+     * @public
+     */
+    this.setEvents = function() {
         var _this = this;
 
-        // On click remove 1 value btn.
         _this.elements.$btnMin.unbind().click(function() {
-
-            if( ! $(this).hasClass(_this.classNames.inactive) ) _this.updateAmount('--');
-
+            if (!$(this).hasClass(_this.classNames.inactive)) _this.updateAmount('--');
             _this.updateElements();
-
         });
 
-        // On click add 1 value btn.
         _this.elements.$btnPlus.unbind().click(function() {
-
-            if( ! $(this).hasClass(_this.classNames.inactive) ) _this.updateAmount('++');
-
+            if(!$(this).hasClass(_this.classNames.inactive)) _this.updateAmount('++');
             _this.updateElements();
-
         });
 
-        // On change input field.
         _this.elements.$input.unbind().change(function() {
-
             _this.updateElements();
-
         });
 
-        // On click add to cart btn.
         _this.elements.$btnAddToCart.unbind().click(function() {
-
             OrderCtrl.createItem({
                 "amount": _this.elements.$input.val(),
                 "id": _this.dataAttrs.itemId,
                 "price": _this.dataAttrs.itemPrice,
                 "title": _this.dataAttrs.itemTitle,
             });
-
         });
 
-        // On click remove from cart btn.
         _this.elements.$btnRemoveFromCart.unbind().click(function() {
-
             if (confirm("Are you sure you want to remove this item from your cart?") == true)
                 OrderCtrl.deleteItem(_this.dataAttrs.itemId);
-
         });
 
     };
 
     /**
-     * TODO
-     */
-    this.init = function() {
-
-        var _this = this;
-
-        _this.createEvents();
-
-        _this.updateElements();
-
-    };
-
-    /**
-     * TODO
+     * Updates the input amount by requested action.
+     * @param {string} action Requested action.
+     * @public
      */
     this.updateAmount = function(action) {
-
         var _this = this,
             $input = _this.elements.$input;
 
@@ -127,14 +109,13 @@ var OrderAmountCtrl = function($element) {
         if (action === '--') $input.val( + $input.val() - 1 );
 
         _this.updateElements();
-
     };
 
     /**
-     * TODO
+     * Checks all states of elements dependent by user input.
+     * @public
      */
     this.updateElements = function() {
-
         var _this = this,
             $btnMin = _this.elements.$btnMin,
             $btnPlus = _this.elements.$btnPlus,
@@ -150,9 +131,7 @@ var OrderAmountCtrl = function($element) {
         if ($input.val() == _this.config.maxAmount) $btnPlus.attr('disabled', true);
         else $btnPlus.attr('disabled', false);
 
-        if (_this.dataAttrs.isControllingOrder)
-            OrderCtrl.updateItemAmount('value', _this.dataAttrs.itemId, $input.val());
-
+        if (_this.dataAttrs.isControllingOrder) OrderCtrl.updateItemAmount('value', _this.dataAttrs.itemId, $input.val());
     };
 
 };
