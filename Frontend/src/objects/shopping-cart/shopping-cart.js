@@ -5,22 +5,34 @@
 var rivets = require('rivets');
 
 /**
- * TODO
+ * Shopping cart class.
+ * @param {jqueryelement} $element Current shopping cart node.
+ * @author Peter Bust <peter.bust@valtech.nl>
  */
 var ShoppingCart = function($element) {
 
+    /**
+     * Initializes shopping cart component.
+     * @public
+     */
     this.init = function() {
+        this.initRivets();
 
-        // configure Rivets
+        OrderCtrl.updateCartElements();
+    };
+
+    /**
+     * Initialize Rivets (data binding solution) by configuring and binding data to element.
+     * @public
+     */
+    this.initRivets = function() {
         rivets.configure({
             templateDelimiters: ['[[', ']]'],
         });
 
-        // bind data to element with Rivets
-        rivets.bind($element, { order: OrderCtrl.order });
-
-        OrderCtrl.updateCartElements();
-
+        rivets.bind($element, {
+            order: OrderCtrl.order
+        });
     };
 
 };

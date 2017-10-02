@@ -1,0 +1,38 @@
+<div class="shopping-cart js-shopping-cart">
+    <table class="table table-bordered table-responsive" rv-hide="order.isEmpty">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Amount</th>
+                <th>Subtotal</th>
+                <th>Controls</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr rv-each-item="order.items">
+                <td><strong>[[ item.title ]]</strong></td>
+                <td>€ [[ item.priceAsString ]]-</td>
+                <td>[[ item.amount ]]</td>
+                <td>€ [[ item.subtotalAsString ]]-</td>
+                <td>
+                    {{> order-amount-ctrl.object
+                        value-input=true
+                        data-is-controlling-order=true
+                        hide-btn-add=true
+                    }}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td><strong>[[ order.totalAmount ]]</strong></td>
+                <td><strong>€ [[ order.totalAsString ]]-</strong></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <div rv-show="order.isEmpty">
+        <p>Shopping cart is empty.</p>
+    </div>
+</div>

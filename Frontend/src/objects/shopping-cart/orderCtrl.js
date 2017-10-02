@@ -125,9 +125,9 @@ var Cookies = require('js-cookie');
             for (var i = 0; i < _this.order.items.length; i++)
                 if (_this.order.items[i].id === id) {
                     _this.order.items.splice(i, 1);
-                    _this.update();
                 }
 
+            _this.update();
         };
 
         /**
@@ -174,7 +174,7 @@ var Cookies = require('js-cookie');
             var _this = this,
                 totalAmount = 0;
 
-            if (!$.isEmptyObject(this.order.items)) {
+            if (_this.order.items.length != 0) {
                 for (var i = 0; i < _this.order.items.length; i++) {
                     var amount = _this.order.items[i].amount,
                         price = _this.order.items[i].price;
@@ -189,7 +189,8 @@ var Cookies = require('js-cookie');
                 _this.order.total = _this.calcTotal(_this.order.items);
                 _this.order.totalAsString = _this.stringifyPrice(_this.order.total);
                 _this.order.totalAmount = totalAmount;
-            }
+                _this.order.isEmpty = false;
+            } else _this.order.isEmpty = true;
 
             _this.save();
 
