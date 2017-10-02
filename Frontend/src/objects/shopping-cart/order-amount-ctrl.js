@@ -55,7 +55,7 @@ var OrderAmountCtrl = function($element) {
         var _this = this;
 
         // On click remove 1 value btn.
-        _this.elements.$btnMin.click(function() {
+        _this.elements.$btnMin.unbind().click(function() {
 
             if( ! $(this).hasClass(_this.classNames.inactive) ) _this.updateAmount('--');
 
@@ -64,7 +64,7 @@ var OrderAmountCtrl = function($element) {
         });
 
         // On click add 1 value btn.
-        _this.elements.$btnPlus.click(function() {
+        _this.elements.$btnPlus.unbind().click(function() {
 
             if( ! $(this).hasClass(_this.classNames.inactive) ) _this.updateAmount('++');
 
@@ -73,14 +73,14 @@ var OrderAmountCtrl = function($element) {
         });
 
         // On change input field.
-        _this.elements.$input.change(function() {
+        _this.elements.$input.unbind().change(function() {
 
             _this.updateElements();
 
         });
 
         // On click add to cart btn.
-        _this.elements.$btnAddToCart.click(function() {
+        _this.elements.$btnAddToCart.unbind().click(function() {
 
             OrderCtrl.createItem({
                 "amount": _this.elements.$input.val(),
@@ -92,7 +92,7 @@ var OrderAmountCtrl = function($element) {
         });
 
         // On click remove from cart btn.
-        _this.elements.$btnRemoveFromCart.click(function() {
+        _this.elements.$btnRemoveFromCart.unbind().click(function() {
 
             if (confirm("Are you sure you want to remove this item from your cart?") == true)
                 OrderCtrl.deleteItem(_this.dataAttrs.itemId);

@@ -89,19 +89,15 @@ var Cookies = require('js-cookie');
                 for (var i = 0; i < _this.order.items.length; i++)
                 if (_this.order.items[i].id === item.id) {
                     _this.order.items[i].amount += item.amount;
+                    _this.updateCartElements();
                     _this.update();
                     return;
                 }
             }
 
-            if (!_this.order.items) _this.order.items = [];
-
             _this.order.items.push(item);
-
-            _this.update();
-
             _this.updateCartElements();
-
+            _this.update();
         };
 
         /**
@@ -127,6 +123,7 @@ var Cookies = require('js-cookie');
                     _this.order.items.splice(i, 1);
                 }
 
+            _this.updateCartElements();
             _this.update();
         };
 
@@ -218,8 +215,9 @@ var Cookies = require('js-cookie');
 
         };
 
-        ////////////////////////////////////////////////////////////////
-        //////////////////////// REMOVE ////////////////////////////////
+        /**
+         * TODO
+         */
         this.updateCartElements = function() {
             var $elements = $('.js-shopping-cart').find('.js-order-amount-ctrl');
             for (var i = 0; i < $elements.length; i++) {
@@ -227,8 +225,6 @@ var Cookies = require('js-cookie');
                 ComponentHandler.upgradeElement($($elements[i]), 'OrderAmountCtrl');
             }
         };
-        //////////////////////// REMOVE ////////////////////////////////
-        ////////////////////////////////////////////////////////////////
 
         /**
          * TODO
