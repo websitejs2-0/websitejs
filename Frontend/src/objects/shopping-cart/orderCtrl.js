@@ -55,20 +55,6 @@ var Cookies = require('js-cookie');
 
             this.order = {};
 
-            this.createItem({
-                "amount": 2,
-                "id": "0001",
-                "price": 2.5,
-                "title": "Item 1",
-            });
-
-            this.createItem({
-                "amount": 1,
-                "id": "0002",
-                "price": 4,
-                "title": "Item 2",
-            });
-
             this.update();
 
         };
@@ -85,14 +71,14 @@ var Cookies = require('js-cookie');
             item.price = parseFloat(item.price);
             item.amount = parseInt(item.amount);
 
-            if (!$.isEmptyObject(_this.order.items)) {
+            if (_this.order.items.length != 0) {
                 for (var i = 0; i < _this.order.items.length; i++)
-                if (_this.order.items[i].id === item.id) {
-                    _this.order.items[i].amount += item.amount;
-                    _this.updateCartElements();
-                    _this.update();
-                    return;
-                }
+                    if (_this.order.items[i].id === item.id) {
+                        _this.order.items[i].amount += item.amount;
+                        _this.updateCartElements();
+                        _this.update();
+                        return;
+                    }
             }
 
             _this.order.items.push(item);
@@ -132,6 +118,8 @@ var Cookies = require('js-cookie');
          */
         this.read = function() {
 
+            if (!Cookies.getJSON(this.cookieConfig.name)) this.create();
+
             return Cookies.getJSON(this.cookieConfig.name);
 
         };
@@ -170,6 +158,8 @@ var Cookies = require('js-cookie');
 
             var _this = this,
                 totalAmount = 0;
+
+            if (!_this.order.items) _this.order.items = [];
 
             if (_this.order.items.length != 0) {
                 for (var i = 0; i < _this.order.items.length; i++) {
