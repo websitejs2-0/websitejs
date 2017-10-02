@@ -20,7 +20,7 @@
          * @public
          */
         this.register = function(item) {
-            
+
             $.each(this.registeredItems, function(i, component) {
 
                 // check for css classname already in use
@@ -170,6 +170,7 @@
          */
         this.upgradeElements = function($elements) {
             for (var i = 0; i < $elements.length; i++) {
+                console.log($($elements[i]));
                 this.upgradeElement($($elements[i]));
             }
         };

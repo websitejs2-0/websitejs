@@ -79,6 +79,7 @@
     "material-design-icons": "^3.0.1",
     "popper.js": "^1.12.5",
     "responsive-toolkit": "^2.6.3",
+    "rivets": "^0.9.6",
     "svg4everybody": "^2.1.9"
   }
 }

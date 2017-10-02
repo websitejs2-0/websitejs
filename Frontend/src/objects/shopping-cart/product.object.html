@@ -1,0 +1,14 @@
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">{{ title }}</h4>
+        <p>{{ price }}</p>
+        {{> order-amount-ctrl.object
+            title=title
+            data-item-id=data-item-id
+            data-item-title=title
+            data-item-price=data-item-price
+            hide-btn-add=hide-btn-add
+            hide-btn-remove=hide-btn-remove
+        }}
+    </div>
+</div>

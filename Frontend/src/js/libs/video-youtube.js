@@ -15,7 +15,7 @@ var VideoYouTube = function() {
 
     window.onYouTubeIframeAPIReady = function() {
         apiLoaded = true;
-    }
+    };
 
     /**
      * Loads Youtube API async.

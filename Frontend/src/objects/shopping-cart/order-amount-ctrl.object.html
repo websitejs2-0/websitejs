@@ -1,0 +1,33 @@
+<div
+    class="input-group js-order-amount-ctrl"
+    {{#if data-item-id}} data-item-id="{{ data-item-id }}" {{/if}}
+    {{#if data-item-title}} data-item-title="{{ data-item-title }}" {{/if}}
+    {{#if data-item-price}} data-item-price="{{ data-item-price }}" {{/if}}
+    {{#if data-is-controlling-order}} rv-data-item-id="item.id" data-is-controlling-order="{{ data-is-controlling-order }}" {{/if}}>
+
+    <span class="input-group-btn">
+        <button class="btn btn-primary amount-ctrl__min" type="button">-</button>
+    </span>
+
+    <input
+        type="number"
+        class="form-control amount-ctrl__input"
+        {{#if value-input}} rv-value="item.amount" {{/if}}
+        placeholder="0">
+
+    <span class="input-group-btn">
+        <button class="btn btn-primary amount-ctrl__plus" type="button">+</button>
+    </span>
+
+    {{#unless hide-btn-add}}
+    <span class="input-group-btn">
+        <button class="btn btn-primary amount-ctrl__add-to-cart" type="button">Add</button>
+    </span>
+    {{/unless}}
+
+    {{#unless hide-btn-remove}}
+    <span class="input-group-btn">
+        <button class="btn btn-primary amount-ctrl__remove-from-cart" type="button">Remove</button>
+    </span>
+    {{/unless}}
+</div>

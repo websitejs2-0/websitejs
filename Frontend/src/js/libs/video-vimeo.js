@@ -20,7 +20,7 @@ var VideoVimeo = function() {
     this.loadApi = function(cb) {
         // load video api and populate player object
         asyncloader.load('https://player.vimeo.com/api/player.js', 100, function() {
-            apiLoaded = true;    
+            apiLoaded = true;
             cb(Vimeo);
         });
     };

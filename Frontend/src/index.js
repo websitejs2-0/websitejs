@@ -15,11 +15,11 @@ viewport.use('Bootstrap4', {
 svg4everybody();
 
 // main logic
-$(function() { 
+$(function() {
 
     // upgrades and inits components registered to the Component Handler
     ComponentHandler.upgradeAllRegistered();
-    
+
     console.log('Loaded.');
 
 });
@@ -28,5 +28,4 @@ $(function() {
 $(window).on('resize', _.debounce(function() {
     console.log('RESIZED');
     console.log('Current breakpoint: ', viewport.current());
-
 }, 200));

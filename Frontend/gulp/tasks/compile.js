@@ -1,28 +1,20 @@
 var path = require('path'),
     config = require(path.join('..', '..', 'project.config.js')),
     fs = require('fs-extra'),
-    del = require('del'),
     chalk = require('chalk'),
     glob = require('glob'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
-    Handlebars = require('handlebars'),
-    hbshelpers = require('../../server/hbs-helpers/helpers.js'),
     pretty = require('pretty');
+    handlebarsLib = require('../../src/js/libs/handlebars-lib.js');
 
-// register handlebars helpers
-Handlebars.registerHelper(hbshelpers);
-
-// register partials
+// select Handlebar partials
 var objects = glob.sync(path.join(config.folders.src.objects, '**/*.object.html')),
     components = glob.sync(path.join(config.folders.src.components, '**/*.html')),
     partials = objects.concat(components);
 
-for (var i = 0; i < partials.length; i++) {
-    var template = fs.readFileSync(partials[i], 'utf8'),
-        name = path.parse(partials[i]).name;
-    Handlebars.registerPartial(name, template);
-}
+// register Handlebar partials
+handlebarsLib.registerPartials(partials);
 
 // html beautify options
 var prettyOptions = {
@@ -32,13 +24,13 @@ var prettyOptions = {
 
 /**
  * Compiles views by compiling handlebars.
- * @param {function} done Callback. 
+ * @param {function} done Callback.
  */
 function compileView(done) {
 
     // get arguments
     var args = process.argv.slice(3);
-    
+
     if (args.length < 1) {
         console.log(chalk.red('\nCompile Error: At least specify a type to compile (--c, --component).'));
         console.log(chalk.red('Or use "gulp compile --ch" to show help.'));
@@ -56,7 +48,7 @@ function compileView(done) {
             }
             case '--c':
             case '--component': {
-                
+
                 if (typeof args[1] !== 'undefined') {
                     if (typeof Handlebars.partials[args[1]] !== 'undefined') {
                         var file = path.join(config.folders.build.components, args[1], args[1] + '.html'),
@@ -84,9 +76,9 @@ function compileView(done) {
                                 if (err) {
                                     console.log(err);
                                 }
-                            }); 
+                            });
                             gutil.log('Compiled: %s', chalk.yellow(file));
-                            /* jshint ignore:end */                           
+                            /* jshint ignore:end */
                         }
                     }
 
@@ -97,7 +89,7 @@ function compileView(done) {
             default: {
                 console.log(chalk.red('\nCompile Error: At least specify a type to compile (--c, --component).'));
                 console.log(chalk.red('Or use "gulp compile --ch" to show help.'));
-                console.log('\n'); 
+                console.log('\n');
                 break;
             }
         }
