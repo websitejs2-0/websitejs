@@ -4,7 +4,7 @@ var path = require('path'),
     config = require('../server.config.js'),
     express = require('express'),
     router = express.Router(),
-    wjs = require('../../src/js/libs/websitejs'),
+    wjs = require('../libs/websitejs'),
     slash = require('slash'),
     glob = require('glob');
 
