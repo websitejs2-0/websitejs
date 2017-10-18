@@ -149,6 +149,7 @@ var AsyncLoader = function() {
             element[fileTypeAttr] = fileType;
             if (elementType === 'script') {
                 element.async = true;
+                element.defer = true;
             }
             document.body.appendChild(element);
 
